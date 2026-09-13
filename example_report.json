@@ -1,0 +1,60 @@
+{
+  "comparison_label": "same experiments, different acceptance boundary",
+  "experiments": [
+    {
+      "challenged_keep": false,
+      "description": "Small repeatable change with complete supporting evidence.",
+      "experiment": "supported-gain",
+      "gated_action": "KEEP",
+      "gated_reasons": [
+        "primary metric improved within resource limits and required evidence passed"
+      ],
+      "original_action": "KEEP",
+      "val_bpb": 0.9932
+    },
+    {
+      "challenged_keep": true,
+      "description": "Primary metric improves but held-out evidence fails.",
+      "experiment": "brittle-gain",
+      "gated_action": "REJECT",
+      "gated_reasons": [
+        "critical checks failed: held_out_robustness"
+      ],
+      "original_action": "KEEP",
+      "val_bpb": 0.9928
+    },
+    {
+      "challenged_keep": true,
+      "description": "Primary metric improves before the required evidence exists.",
+      "experiment": "unsupported-gain",
+      "gated_action": "ESCALATE",
+      "gated_reasons": [
+        "critical evidence is unknown: held_out_robustness",
+        "required evidence is unknown: held_out_robustness, repeatability",
+        "evidence coverage 50% is below the required 75%"
+      ],
+      "original_action": "KEEP",
+      "val_bpb": 0.9919
+    },
+    {
+      "challenged_keep": false,
+      "description": "The primary metric gets worse.",
+      "experiment": "metric-regression",
+      "gated_action": "REJECT",
+      "gated_reasons": [
+        "primary metric did not improve by the required 0.000001"
+      ],
+      "original_action": "REJECT",
+      "val_bpb": 1.001
+    }
+  ],
+  "interpretation_limit": "A challenged keep is an experiment requiring rejection or review under the gate. It is not automatically a proven safety failure.",
+  "totals": {
+    "challenged_keeps": 2,
+    "experiments": 4,
+    "gated_escalations": 1,
+    "gated_keeps": 1,
+    "gated_rejects": 2,
+    "original_keeps": 3
+  }
+}

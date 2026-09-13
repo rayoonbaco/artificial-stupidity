@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "machine_gate_action": "ESCALATE",
+  "machine_reason": "required evidence is unknown: human_comprehensibility",
+  "human_authorization": {
+    "reviewer": "Raymond Anthony Gomez",
+    "date": "2026-09-13",
+    "decision": "KEEP",
+    "typed_authorization": "Okay, then keep."
+  },
+  "final_governed_decision": "KEEP",
+  "evidence_archive_sha256": "beae21136a79afc8d11fafe4c5b92c8ea7f3b311b0c812218d694d429d4a9010"
+}

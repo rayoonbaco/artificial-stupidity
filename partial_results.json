@@ -1,0 +1,182 @@
+{
+  "baseline": [
+    {
+      "arm": "baseline",
+      "exit_code": 0,
+      "log": "raw_logs/baseline_1.log",
+      "log_sha256": "0921305193626dd0fc51aaaf074c37a753bd1ecb47586338b628546b372b94ec",
+      "metrics": {
+        "depth": 8,
+        "holdout_bpb": 0.998995,
+        "mfu_percent": 37.03,
+        "num_params_M": 50.3,
+        "num_steps": 887,
+        "peak_vram_mb": 45060.2,
+        "total_seconds": 385.7,
+        "total_tokens_M": 465.0,
+        "training_seconds": 300.0,
+        "val_bpb": 0.999791
+      },
+      "run": 1,
+      "started_at_utc": "2026-09-13T21:30:05.745255+00:00"
+    },
+    {
+      "arm": "baseline",
+      "exit_code": 0,
+      "log": "raw_logs/baseline_2.log",
+      "log_sha256": "ea4e40e18fb8f5188fcd3334077c486a279cb189407ad7d633b1755da1607293",
+      "metrics": {
+        "depth": 8,
+        "holdout_bpb": 0.999357,
+        "mfu_percent": 36.84,
+        "num_params_M": 50.3,
+        "num_steps": 883,
+        "peak_vram_mb": 45060.2,
+        "total_seconds": 354.2,
+        "total_tokens_M": 462.9,
+        "training_seconds": 300.2,
+        "val_bpb": 1.000213
+      },
+      "run": 2,
+      "started_at_utc": "2026-09-13T21:43:24.931482+00:00"
+    },
+    {
+      "arm": "baseline",
+      "exit_code": 0,
+      "log": "raw_logs/baseline_3.log",
+      "log_sha256": "af308a62fbab7068474c63af07efaa364d70b24296236b0739988c07dd4830f2",
+      "metrics": {
+        "depth": 8,
+        "holdout_bpb": 1.001117,
+        "mfu_percent": 35.9,
+        "num_params_M": 50.3,
+        "num_steps": 861,
+        "peak_vram_mb": 45060.2,
+        "total_seconds": 355.5,
+        "total_tokens_M": 451.4,
+        "training_seconds": 300.3,
+        "val_bpb": 1.001808
+      },
+      "run": 3,
+      "started_at_utc": "2026-09-13T21:55:37.642100+00:00"
+    }
+  ],
+  "baseline_gate_record": {
+    "commit": "instrumented-baseline-total-batch-2pow19",
+    "peak_vram_mb": 45060.2,
+    "val_bpb": 1.000213
+  },
+  "candidate": [
+    {
+      "arm": "candidate",
+      "exit_code": 0,
+      "log": "raw_logs/candidate_1.log",
+      "log_sha256": "cc4f31ba7ed7e26d5bc13ec0169ed397249a2a67538796ab6a3fc7c3f5738340",
+      "metrics": {
+        "depth": 8,
+        "holdout_bpb": 0.989901,
+        "mfu_percent": 36.71,
+        "num_params_M": 50.3,
+        "num_steps": 1749,
+        "peak_vram_mb": 44908.2,
+        "total_seconds": 355.4,
+        "total_tokens_M": 458.5,
+        "training_seconds": 300.0,
+        "val_bpb": 0.990674
+      },
+      "run": 1,
+      "started_at_utc": "2026-09-13T21:37:08.725959+00:00"
+    },
+    {
+      "arm": "candidate",
+      "exit_code": 0,
+      "log": "raw_logs/candidate_2.log",
+      "log_sha256": "4685be51506466d4e4948c9bd3bf19ceaa9142b7df53a0f978ef9375cf0400c2",
+      "metrics": {
+        "depth": 8,
+        "holdout_bpb": 0.990126,
+        "mfu_percent": 36.44,
+        "num_params_M": 50.3,
+        "num_steps": 1736,
+        "peak_vram_mb": 44908.2,
+        "total_seconds": 353.2,
+        "total_tokens_M": 455.1,
+        "training_seconds": 300.0,
+        "val_bpb": 0.990934
+      },
+      "run": 2,
+      "started_at_utc": "2026-09-13T21:49:32.384644+00:00"
+    },
+    {
+      "arm": "candidate",
+      "exit_code": 0,
+      "log": "raw_logs/candidate_3.log",
+      "log_sha256": "759a41e6091b40deed929cc398d48e27f0dd1b7ae6362fd0409c965f6c3694f1",
+      "metrics": {
+        "depth": 8,
+        "holdout_bpb": 0.990284,
+        "mfu_percent": 36.24,
+        "num_params_M": 50.3,
+        "num_steps": 1727,
+        "peak_vram_mb": 44908.2,
+        "total_seconds": 367.7,
+        "total_tokens_M": 452.7,
+        "training_seconds": 300.1,
+        "val_bpb": 0.991104
+      },
+      "run": 3,
+      "started_at_utc": "2026-09-13T22:01:47.462014+00:00"
+    }
+  ],
+  "candidate_gate_record": {
+    "checks": {
+      "failure_mode_review": "pass",
+      "held_out_robustness": "pass",
+      "human_comprehensibility": "unknown",
+      "repeatability": "pass"
+    },
+    "commit": "candidate-total-batch-2pow18",
+    "complexity_delta_lines": 1,
+    "disconfirming_result": "Any failed candidate run, overlapping validation distributions, or a candidate holdout result that does not beat every baseline run.",
+    "hypothesis": "Halving total batch size improves five-minute validation BPB and the preregistered protected-holdout BPB on the same H100 setup.",
+    "peak_vram_mb": 44908.2,
+    "run_status": "ok",
+    "val_bpb": 0.990934
+  },
+  "summary": {
+    "baseline_holdout_bpb": [
+      0.998995,
+      0.999357,
+      1.001117
+    ],
+    "baseline_holdout_median": 0.999357,
+    "baseline_runs_found": 3,
+    "baseline_val_bpb": [
+      0.999791,
+      1.000213,
+      1.001808
+    ],
+    "baseline_val_median": 1.000213,
+    "candidate_holdout_bpb": [
+      0.989901,
+      0.990126,
+      0.990284
+    ],
+    "candidate_holdout_median": 0.990126,
+    "candidate_runs_found": 3,
+    "candidate_val_bpb": [
+      0.990674,
+      0.990934,
+      0.991104
+    ],
+    "candidate_val_median": 0.990934,
+    "checks": {
+      "failure_mode_review": "pass",
+      "held_out_robustness": "pass",
+      "human_comprehensibility": "unknown",
+      "repeatability": "pass"
+    },
+    "expected_runs_per_arm": 3,
+    "interpretation": "The automated run never grants its own human-comprehensibility sign-off. A machine result can therefore REJECT or ESCALATE, but final KEEP requires a named human review."
+  }
+}

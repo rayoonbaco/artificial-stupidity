@@ -1,0 +1,5 @@
+{
+  "experiment": "original-baseline-median",
+  "val_bpb": 1.052944,
+  "peak_vram_mb": 45060.2
+}

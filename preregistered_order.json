@@ -1,0 +1,32 @@
+[
+  {
+    "arm": "baseline",
+    "run": 1,
+    "script": "benchmark/instrumented/train_baseline_holdout.py"
+  },
+  {
+    "arm": "candidate",
+    "run": 1,
+    "script": "benchmark/instrumented/train_candidate_holdout.py"
+  },
+  {
+    "arm": "baseline",
+    "run": 2,
+    "script": "benchmark/instrumented/train_baseline_holdout.py"
+  },
+  {
+    "arm": "candidate",
+    "run": 2,
+    "script": "benchmark/instrumented/train_candidate_holdout.py"
+  },
+  {
+    "arm": "baseline",
+    "run": 3,
+    "script": "benchmark/instrumented/train_baseline_holdout.py"
+  },
+  {
+    "arm": "candidate",
+    "run": 3,
+    "script": "benchmark/instrumented/train_candidate_holdout.py"
+  }
+]

@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "source_run_id": "20260913T212840Z",
+  "baseline": {
+    "validation_bpb": [0.999791, 1.000213, 1.001808],
+    "protected_holdout_bpb": [0.998995, 0.999357, 1.001117],
+    "validation_median": 1.000213,
+    "protected_holdout_median": 0.999357,
+    "peak_vram_mb": 45060.2
+  },
+  "candidate": {
+    "validation_bpb": [0.990674, 0.990934, 0.991104],
+    "protected_holdout_bpb": [0.989901, 0.990126, 0.990284],
+    "validation_median": 0.990934,
+    "protected_holdout_median": 0.990126,
+    "peak_vram_mb": 44908.2
+  },
+  "comparisons": {
+    "validation_absolute_improvement": 0.009279,
+    "validation_relative_improvement_percent": 0.927702,
+    "protected_holdout_absolute_improvement": 0.009231,
+    "protected_holdout_relative_improvement_percent": 0.923694,
+    "validation_pairwise_wins": "9/9",
+    "protected_holdout_pairwise_wins": "9/9",
+    "peak_vram_reduction_percent": 0.337327
+  },
+  "empirical_boundary": "PASS",
+  "machine_gate_action": "ESCALATE",
+  "human_authorization": {
+    "reviewer": "Raymond Anthony Gomez",
+    "date": "2026-09-13",
+    "decision": "KEEP",
+    "typed_authorization": "Okay, then keep."
+  },
+  "final_governed_decision": "KEEP"
+}

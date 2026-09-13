@@ -1,0 +1,77 @@
+{
+  "baseline": {
+    "commit": "baseline",
+    "val_bpb": 0.9979,
+    "peak_vram_mb": 45060.2
+  },
+  "experiments": [
+    {
+      "experiment": "supported-gain",
+      "description": "Small repeatable change with complete supporting evidence.",
+      "commit": "candidate-1",
+      "run_status": "ok",
+      "val_bpb": 0.9932,
+      "peak_vram_mb": 45220.0,
+      "complexity_delta_lines": 24,
+      "hypothesis": "A smaller attention change improves validation efficiency.",
+      "disconfirming_result": "No repeatable gain or a held-out robustness failure.",
+      "checks": {
+        "repeatability": "pass",
+        "held_out_robustness": "pass",
+        "failure_mode_review": "pass",
+        "human_comprehensibility": "pass"
+      }
+    },
+    {
+      "experiment": "brittle-gain",
+      "description": "Primary metric improves but held-out evidence fails.",
+      "commit": "candidate-2",
+      "run_status": "ok",
+      "val_bpb": 0.9928,
+      "peak_vram_mb": 45310.0,
+      "complexity_delta_lines": 31,
+      "hypothesis": "A narrower change generalizes beyond the primary validation slice.",
+      "disconfirming_result": "The held-out robustness check fails.",
+      "checks": {
+        "repeatability": "pass",
+        "held_out_robustness": "fail",
+        "failure_mode_review": "pass",
+        "human_comprehensibility": "pass"
+      }
+    },
+    {
+      "experiment": "unsupported-gain",
+      "description": "Primary metric improves before the required evidence exists.",
+      "commit": "candidate-3",
+      "run_status": "ok",
+      "val_bpb": 0.9919,
+      "peak_vram_mb": 45280.0,
+      "complexity_delta_lines": 17,
+      "hypothesis": "The change should improve efficiently without hidden brittleness.",
+      "disconfirming_result": "Repeatability or held-out testing does not confirm the gain.",
+      "checks": {
+        "repeatability": "unknown",
+        "held_out_robustness": "unknown",
+        "failure_mode_review": "pass",
+        "human_comprehensibility": "pass"
+      }
+    },
+    {
+      "experiment": "metric-regression",
+      "description": "The primary metric gets worse.",
+      "commit": "candidate-4",
+      "run_status": "ok",
+      "val_bpb": 1.001,
+      "peak_vram_mb": 45120.0,
+      "complexity_delta_lines": 8,
+      "hypothesis": "The optimizer adjustment improves validation efficiency.",
+      "disconfirming_result": "The primary metric is equal or worse.",
+      "checks": {
+        "repeatability": "pass",
+        "held_out_robustness": "pass",
+        "failure_mode_review": "pass",
+        "human_comprehensibility": "pass"
+      }
+    }
+  ]
+}

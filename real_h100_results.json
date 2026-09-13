@@ -1,0 +1,50 @@
+{
+  "benchmark_date": "2026-09-13",
+  "hardware": {
+    "provider": "RunPod",
+    "gpu": "NVIDIA H100 PCIe",
+    "gpu_memory_mib": 81559,
+    "driver": "580.159.04",
+    "host_cuda": "13.0"
+  },
+  "protocol": {
+    "training_budget_seconds": 300,
+    "baseline_total_batch_size": 524288,
+    "candidate_total_batch_size": 262144,
+    "device_batch_size": 128,
+    "candidate_code_delta_lines": 1,
+    "lower_val_bpb_is_better": true
+  },
+  "baseline_runs": [
+    {"run": 1, "val_bpb": 1.050835, "peak_vram_mb": 45060.2, "total_tokens_m": 249.0, "num_steps": 475, "training_seconds": 300.1, "total_seconds": 450.8},
+    {"run": 2, "val_bpb": 1.052944, "peak_vram_mb": 45060.2, "total_tokens_m": 243.8, "num_steps": 465, "training_seconds": 300.6, "total_seconds": 385.0},
+    {"run": 3, "val_bpb": 1.053579, "peak_vram_mb": 45060.2, "total_tokens_m": 243.3, "num_steps": 464, "training_seconds": 300.6, "total_seconds": 387.7}
+  ],
+  "candidate_runs": [
+    {"run": 1, "val_bpb": 1.030497, "peak_vram_mb": 44908.2, "total_tokens_m": 237.0, "num_steps": 904, "training_seconds": 300.2, "total_seconds": 381.1},
+    {"run": 2, "val_bpb": 1.025939, "peak_vram_mb": 44908.2, "total_tokens_m": 250.9, "num_steps": 957, "training_seconds": 300.1, "total_seconds": 383.4},
+    {"run": 3, "val_bpb": 1.030131, "peak_vram_mb": 44908.2, "total_tokens_m": 237.2, "num_steps": 905, "training_seconds": 300.1, "total_seconds": 392.4}
+  ],
+  "failed_probe": {
+    "change": "DEVICE_BATCH_SIZE 128 to 256",
+    "result": "REJECT",
+    "reason": "CUDA out of memory before a score was produced",
+    "memory_in_use_gib": 79.08
+  },
+  "derived_results": {
+    "baseline_median_val_bpb": 1.052944,
+    "candidate_median_val_bpb": 1.030131,
+    "absolute_median_improvement": 0.022813,
+    "relative_median_improvement_percent": 2.166592,
+    "baseline_range": [1.050835, 1.053579],
+    "candidate_range": [1.025939, 1.030497],
+    "worst_candidate_beats_best_baseline_by": 0.020338,
+    "peak_memory_change_percent": -0.337327
+  },
+  "provenance": {
+    "status": "reconstructed from user-preserved RunPod terminal transcript after the original cloud archive was lost",
+    "raw_training_logs_available": false,
+    "terminal_transcript": "RUNPOD_TERMINAL_TRANSCRIPT_RECOVERED.txt",
+    "claim_limit": "The results establish repeatable same-hardware validation improvement for this one change. They do not establish independent held-out robustness or a general safety benefit."
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "eval_tokens": 20971520,
+  "filename": "shard_06541.parquet",
+  "path": "/root/.cache/autoresearch/protected_holdout/shard_06541.parquet",
+  "sha256": "51da1a9bc052dfd5a77988d6ca4d1cbe62b89eedb247b56850fc1b9b45e56c73",
+  "shard": 6541,
+  "size_bytes": 91897402,
+  "url": "https://huggingface.co/datasets/karpathy/climbmix-400b-shuffle/resolve/main/shard_06541.parquet"
+}

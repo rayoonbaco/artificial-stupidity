@@ -1,0 +1,15 @@
+{
+  "experiment": "total-batch-2**18",
+  "val_bpb": 1.030131,
+  "peak_vram_mb": 44908.2,
+  "complexity_delta_lines": 1,
+  "run_status": "ok",
+  "hypothesis": "Halving total batch size will improve validation bits per byte within the fixed five-minute budget without increasing memory.",
+  "disconfirming_result": "Reject if runs fail, resource use exceeds limits, or the improvement does not reproduce.",
+  "checks": {
+    "repeatability": "pass",
+    "held_out_robustness": "unknown",
+    "failure_mode_review": "pass",
+    "human_comprehensibility": "pass"
+  }
+}

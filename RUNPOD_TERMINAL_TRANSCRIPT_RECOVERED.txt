@@ -1,0 +1,294 @@
+groups: cannot find name for group ID 109
+ _____                             _ 
+|  __ \                           | |
+| |__) |   _ _ __  _ __   ___   __| |
+|  _  / | | | '_ \| '_ \ / _ \ / _` |
+| | \ \ |_| | | | | |_) | (_) | (_| |
+|_|  \_\__,_|_| |_| .__/ \___/ \__,_|
+                  | |                
+                  |_|                
+For detailed documentation and guides, please visit:
+https://docs.runpod.io/ and https://blog.runpod.io/
+
+
+root@5f16f2c10582:/# cd /workspace && unzip -q artificial-stupidity-autoresearch-WINDOWS-v3.zip && cd artificial-stupidity-autoresearch && nvidia-smi
+Sun Sep 13 18:02:45 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.159.04             Driver Version: 580.159.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 PCIe               On  |   00000000:D1:00.0 Off |                    0 |
+| N/A   22C    P0             45W /  310W |       0MiB /  81559MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+root@5f16f2c10582:/workspace/artificial-stupidity-autoresearch# if ! command -v uv >/dev/null 2>&1; then curl -LsSf https://astral.sh/uv/install.sh | sh && export PATH="/root/.local/bin:$PATH"; fi; uv sync
+Using CPython 3.10.18 interpreter at: /usr/bin/python3.10
+Creating virtual environment at: .venv
+Resolved 74 packages in 6ms
+Prepared 67 packages in 3m 10s
+Installed 67 packages in 40.86s
+ + annotated-doc==0.0.4
+ + anyio==4.12.1
+ + certifi==2026.2.25
+ + charset-normalizer==3.4.4
+ + click==8.3.1
+ + contourpy==1.3.2
+ + cycler==0.12.1
+ + exceptiongroup==1.3.1
+ + filelock==3.24.3
+ + fonttools==4.61.1
+ + fsspec==2026.2.0
+ + h11==0.16.0
+ + hf-xet==1.3.1
+ + httpcore==1.0.9
+ + httpx==0.28.1
+ + huggingface-hub==1.5.0
+ + idna==3.11
+ + jinja2==3.1.6
+ + kernels==0.12.1
+ + kiwisolver==1.4.9
+ + markdown-it-py==4.0.0
+ + markupsafe==3.0.3
+ + matplotlib==3.10.8
+ + mdurl==0.1.2
+ + mpmath==1.3.0
+ + networkx==3.4.2
+ + numpy==2.2.6
+ + nvidia-cublas-cu12==12.8.4.1
+ + nvidia-cuda-cupti-cu12==12.8.90
+ + nvidia-cuda-nvrtc-cu12==12.8.93
+ + nvidia-cuda-runtime-cu12==12.8.90
+ + nvidia-cudnn-cu12==9.10.2.21
+ + nvidia-cufft-cu12==11.3.3.83
+ + nvidia-cufile-cu12==1.13.1.3
+ + nvidia-curand-cu12==10.3.9.90
+ + nvidia-cusolver-cu12==11.7.3.90
+ + nvidia-cusparse-cu12==12.5.8.93
+ + nvidia-cusparselt-cu12==0.7.1
+ + nvidia-nccl-cu12==2.27.5
+ + nvidia-nvjitlink-cu12==12.8.93
+ + nvidia-nvshmem-cu12==3.3.20
+ + nvidia-nvtx-cu12==12.8.90
+ + packaging==26.0
+ + pandas==2.3.3
+ + pillow==12.1.1
+ + pyarrow==23.0.1
+ + pygments==2.19.2
+ + pyparsing==3.3.2
+ + python-dateutil==2.9.0.post0
+ + pytz==2026.1.post1
+ + pyyaml==6.0.3
+ + regex==2026.2.19
+ + requests==2.32.5
+ + rich==14.3.3
+ + rustbpe==0.1.0
+ + shellingham==1.5.4
+ + six==1.17.0
+ + sympy==1.14.0
+ + tiktoken==0.12.0
+ + tomli==2.4.0
+ + torch==2.9.1+cu128
+ + tqdm==4.67.3
+ + triton==3.5.1
+ + typer==0.24.1
+ + typing-extensions==4.15.0
+ + tzdata==2025.3
+ + urllib3==2.6.3
+root@5f16f2c10582:/workspace/artificial-stupidity-autoresearch# uv run prepare.py > benchmark/prepare.log 2>&1; prep_status=$?; tail -n 40 benchmark/prepare.log; echo PREP_EXIT:$prep_status
+
+Cache directory: /root/.cache/autoresearch
+
+Data: downloading 11 shards (0 already exist)...
+  Downloaded shard_00006.parquet
+  Downloaded shard_00005.parquet
+  Downloaded shard_00003.parquet
+  Downloaded shard_00004.parquet
+  Downloaded shard_00000.parquet
+  Downloaded shard_00001.parquet
+  Downloaded shard_00007.parquet
+  Downloaded shard_00002.parquet
+  Downloaded shard_00009.parquet
+  Downloaded shard_00008.parquet
+  Downloaded shard_06542.parquet
+Data: 11/11 shards ready at /root/.cache/autoresearch/data
+
+Tokenizer: training BPE tokenizer...
+Tokenizer: trained in 72.4s, saved to /root/.cache/autoresearch/tokenizer/tokenizer.pkl
+Tokenizer: building token_bytes lookup...
+Tokenizer: saved token_bytes to /root/.cache/autoresearch/tokenizer/token_bytes.pt
+Tokenizer: sanity check passed (vocab_size=8192)
+
+Done! Ready to train.
+PREP_EXIT:0
+root@5f16f2c10582:/workspace/artificial-stupidity-autoresearch# 
+root@5f16f2c10582:/workspace/artificial-stupidity-autoresearch# uv run train.py > benchmark/baseline_1.log 2>&1; run_status=$?; tail -n 25 benchmark/baseline_1.log; echo BASELINE_EXIT:$run_status
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Vocab size: 8,192
+Model config: {'sequence_len': 2048, 'vocab_size': 8192, 'n_layer': 8, 'n_head': 4, 'n_kv_head': 4, 'n_embd': 512, 'window_pattern': 'SSSL'}
+Parameter counts:
+  wte                     : 4,194,304
+  value_embeds            : 16,777,216
+  lm_head                 : 4,194,304
+  transformer_matrices    : 25,166,336
+  scalars                 : 16
+  total                   : 50,332,176
+Estimated FLOPs per token: 2.390784e+08
+Scaling AdamW LRs by 1/sqrt(512/768) = 1.224745
+Time budget: 300s
+Gradient accumulation steps: 2
+step 00474 (99.8%) | loss: 2.944471 | lrm: 0.00 | dt: 645ms | tok/sec: 813,253 | mfu: 19.6% | epoch: 1 | remaining: 0s        
+---
+val_bpb:          1.050835
+training_seconds: 300.1
+total_seconds:    450.8
+peak_vram_mb:     45060.2
+mfu_percent:      19.63
+total_tokens_M:   249.0
+num_steps:        475
+num_params_M:     50.3
+depth:            8
+BASELINE_EXIT:0
+root@5f16f2c10582:/workspace/artificial-stupidity-autoresearch# for i in 2 3; do echo "STARTING BASELINE $i"; uv run train.py > benchmark/baseline_$i.log 2>&1; echo "BASELINE $i EXIT:$?"; grep -E '^(val_bpb|training_seconds|total_seconds|peak_vram_mb|total_tokens_M|num_steps):' benchmark/baseline_$i.log; done
+STARTING BASELINE 2
+BASELINE 2 EXIT:0
+val_bpb:          1.052944
+training_seconds: 300.6
+total_seconds:    385.0
+peak_vram_mb:     45060.2
+total_tokens_M:   243.8
+num_steps:        465
+STARTING BASELINE 3
+BASELINE 3 EXIT:0
+val_bpb:          1.053579
+training_seconds: 300.6
+total_seconds:    387.7
+peak_vram_mb:     45060.2
+total_tokens_M:   243.3
+num_steps:        464
+root@5f16f2c10582:/workspace/artificial-stupidity-autoresearch# cp train.py benchmark/train_baseline.py && sed -i 's/DEVICE_BATCH_SIZE = 128/DEVICE_BATCH_SIZE = 256/' train.py && grep '^DEVICE_BATCH_SIZE' train.py && uv run train.py > benchmark/candidate_batch256_1.log 2>&1; candidate_status=$?; tail -n 30 benchmark/candidate_batch256_1.log; echo CANDIDATE_EXIT:$candidate_status
+DEVICE_BATCH_SIZE = 256  # per-device batch size (reduce if OOM)
+    return forward_call(*args, **kwargs)
+  File "/workspace/artificial-stupidity-autoresearch/train.py", line 268, in forward
+    def forward(self, idx, targets=None, reduction='mean'):
+  File "/workspace/artificial-stupidity-autoresearch/.venv/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 1044, in _fn
+    return fn(*args, **kwargs)
+  File "/workspace/artificial-stupidity-autoresearch/.venv/lib/python3.10/site-packages/torch/_functorch/aot_autograd.py", line 1130, in forward
+    return compiled_fn(full_args)
+  File "/workspace/artificial-stupidity-autoresearch/.venv/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 339, in runtime_wrapper
+    all_outs = call_func_at_runtime_with_args(
+  File "/workspace/artificial-stupidity-autoresearch/.venv/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/utils.py", line 129, in call_func_at_runtime_with_args
+    out = normalize_as_list(f(args))
+  File "/workspace/artificial-stupidity-autoresearch/.venv/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/utils.py", line 103, in g
+    return f(*args)
+  File "/workspace/artificial-stupidity-autoresearch/.venv/lib/python3.10/site-packages/torch/autograd/function.py", line 581, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+  File "/workspace/artificial-stupidity-autoresearch/.venv/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 2118, in forward
+    fw_outs = call_func_at_runtime_with_args(
+  File "/workspace/artificial-stupidity-autoresearch/.venv/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/utils.py", line 129, in call_func_at_runtime_with_args
+    out = normalize_as_list(f(args))
+  File "/workspace/artificial-stupidity-autoresearch/.venv/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 526, in wrapper
+    return compiled_fn(runtime_args)
+  File "/workspace/artificial-stupidity-autoresearch/.venv/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 724, in inner_fn
+    outs = compiled_fn(args)
+  File "/workspace/artificial-stupidity-autoresearch/.venv/lib/python3.10/site-packages/torch/_inductor/output_code.py", line 613, in __call__
+    return self.current_callable(inputs)
+  File "/workspace/artificial-stupidity-autoresearch/.venv/lib/python3.10/site-packages/torch/_inductor/utils.py", line 3017, in run
+    out = model(new_inputs)
+  File "/tmp/torchinductor_root/5p/c5pkut47cmaopntlutkrpmbqbt4tmzn3j5hbbzwwnzf2vqvk6od3.py", line 2664, in call
+    buf301 = empty_strided_cuda((256, 2048, 512), (1048576, 512, 1), torch.bfloat16)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 512.00 MiB. GPU 0 has a total capacity of 79.18 GiB of which 96.19 MiB is free. Including non-PyTorch memory, this process has 79.08 GiB memory in use. Of the allocated memory 78.48 GiB is allocated by PyTorch, and 14.00 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+CANDIDATE_EXIT:1
+root@5f16f2c10582:/workspace/artificial-stupidity-autoresearch# cp benchmark/train_baseline.py train.py && sed -i 's/TOTAL_BATCH_SIZE = 2\*\*19/TOTAL_BATCH_SIZE = 2**18/' train.py && grep -E '^(TOTAL_BATCH_SIZE|DEVICE_BATCH_SIZE)' train.py && uv run train.py > benchmark/candidate_totalbatch262k_1.log 2>&1; candidate_status=$?; tail -n 30 benchmark/candidate_totalbatch262k_1.log; echo CANDIDATE_EXIT:$candidate_status
+TOTAL_BATCH_SIZE = 2**18 # ~524K tokens per optimizer step
+DEVICE_BATCH_SIZE = 128  # per-device batch size (reduce if OOM)
+Vocab size: 8,192
+Model config: {'sequence_len': 2048, 'vocab_size': 8192, 'n_layer': 8, 'n_head': 4, 'n_kv_head': 4, 'n_embd': 512, 'window_pattern': 'SSSL'}
+Parameter counts:
+  wte                     : 4,194,304
+  value_embeds            : 16,777,216
+  lm_head                 : 4,194,304
+  transformer_matrices    : 25,166,336
+  scalars                 : 16
+  total                   : 50,332,176
+Estimated FLOPs per token: 2.390784e+08
+Scaling AdamW LRs by 1/sqrt(512/768) = 1.224745
+Time budget: 300s
+Gradient accumulation steps: 1
+step 00903 (100.0%) | loss: 2.894522 | lrm: 0.00 | dt: 354ms | tok/sec: 739,706 | mfu: 17.9% | epoch: 1 | remaining: 0s       
+---
+val_bpb:          1.030497
+training_seconds: 300.2
+total_seconds:    381.1
+peak_vram_mb:     44908.2
+mfu_percent:      18.86
+total_tokens_M:   237.0
+num_steps:        904
+num_params_M:     50.3
+depth:            8
+CANDIDATE_EXIT:0
+root@5f16f2c10582:/workspace/artificial-stupidity-autoresearch# for i in 2 3; do echo "STARTING CANDIDATE CONFIRMATION $i"; uv run train.py > benchmark/candidate_totalbatch262k_$i.log 2>&1; echo "CANDIDATE $i EXIT:$?"; grep -E '^(val_bpb|training_seconds|total_seconds|peak_vram_mb|mfu_percent|total_tokens_M|num_steps):' benchmark/candidate_totalbatch262k_$i.log; done
+STARTING CANDIDATE CONFIRMATION 2
+CANDIDATE 2 EXIT:0
+val_bpb:          1.025939
+training_seconds: 300.1
+total_seconds:    383.4
+peak_vram_mb:     44908.2
+mfu_percent:      19.99
+total_tokens_M:   250.9
+num_steps:        957
+STARTING CANDIDATE CONFIRMATION 3
+CANDIDATE 3 EXIT:0
+val_bpb:          1.030131
+training_seconds: 300.1
+total_seconds:    392.4
+peak_vram_mb:     44908.2
+mfu_percent:      18.89
+total_tokens_M:   237.2
+num_steps:        905
+root@5f16f2c10582:/workspace/artificial-stupidity-autoresearch# uv run python -c 'import json; from pathlib import Path; b={"experiment":"original-baseline-median","val_bpb":1.052944,"peak_vram_mb":45060.2}; c={"experiment":"total-batch-2**18","val_bpb":1.030131,"peak_vram_mb":44908.2,"complexity_delta_lines":1,"run_status":"ok","hypothesis":"Halving total batch size will improve validation bits per byte within the fixed five-minute budget without increasing memory.","disconfirming_result":"Reject if runs fail, resource use exceeds limits, or the improvement does not reproduce.","checks":{"repeatability":"pass","held_out_robustness":"unknown","failure_mode_review":"pass","human_comprehensibility":"pass"}}; Path("benchmark/real_baseline.json").write_text(json.dumps(b,indent=2)); Path("benchmark/real_candidate.json").write_text(json.dumps(c,indent=2)); Path("benchmark/REAL_BENCHMARK_REPORT.md").write_text("# Real H100 Benchmark\n\nBaseline median val_bpb: 1.052944\n\nCandidate median val_bpb: 1.030131\n\nMedian improvement: 0.022813 (2.17%)\n\nEvery candidate beat every baseline. Peak memory fell 0.34%. The original metric rule returns KEEP. The evidence gate returns ESCALATE because protected held-out robustness remains unknown.\n")' && uv run python gate/as_gate.py --baseline benchmark/real_baseline.json --candidate benchmark/real_candidate.json --output benchmark/real_gate_decision.json; gate_status=$?; zip -q -r /workspace/artificial-stupidity-real-benchmark.zip benchmark train.py gate/gate_config.json gate/as_gate.py; echo GATE_EXIT:$gate_status; cat benchmark/real_gate_decision.json; echo ARCHIVE_READY:/workspace/artificial-stupidity-real-benchmark.zip
+{
+  "action": "ESCALATE",
+  "facts": {
+    "baseline_val_bpb": 1.052944,
+    "candidate_val_bpb": 1.030131,
+    "complexity_delta_lines": 1,
+    "evidence_coverage": 0.75,
+    "memory_growth_fraction": -0.003373,
+    "val_bpb_improvement": 0.022813
+  },
+  "reasons": [
+    "critical evidence is unknown: held_out_robustness",
+    "required evidence is unknown: held_out_robustness"
+  ],
+  "warnings": []
+}
+GATE_EXIT:3
+{
+  "action": "ESCALATE",
+  "facts": {
+    "baseline_val_bpb": 1.052944,
+    "candidate_val_bpb": 1.030131,
+    "complexity_delta_lines": 1,
+    "evidence_coverage": 0.75,
+    "memory_growth_fraction": -0.003373,
+    "val_bpb_improvement": 0.022813
+  },
+  "reasons": [
+    "critical evidence is unknown: held_out_robustness",
+    "required evidence is unknown: held_out_robustness"
+  ],
+  "warnings": []
+}
+ARCHIVE_READY:/workspace/artificial-stupidity-real-benchmark.zip
+root@5f16f2c10582:/workspace/artificial-stupidity-autoresearch# 

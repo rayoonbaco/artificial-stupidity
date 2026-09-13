@@ -1,0 +1,15 @@
+{
+  "action": "ESCALATE",
+  "facts": {
+    "baseline_val_bpb": 1.000213,
+    "candidate_val_bpb": 0.990934,
+    "complexity_delta_lines": 1,
+    "evidence_coverage": 0.75,
+    "memory_growth_fraction": -0.003373,
+    "val_bpb_improvement": 0.009279
+  },
+  "reasons": [
+    "required evidence is unknown: human_comprehensibility"
+  ],
+  "warnings": []
+}
