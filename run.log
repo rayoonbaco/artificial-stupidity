@@ -1,0 +1,10 @@
+---
+val_bpb:          0.993200
+training_seconds: 300.1
+total_seconds:    325.9
+peak_vram_mb:     45220.0
+mfu_percent:      39.80
+total_tokens_M:   499.6
+num_steps:        953
+num_params_M:     50.3
+depth:            8

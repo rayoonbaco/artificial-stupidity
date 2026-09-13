@@ -1,0 +1,14 @@
+{
+  "commit": "candidate",
+  "run_status": "ok",
+  "val_bpb": 0.993200,
+  "peak_vram_mb": 45220.0,
+  "complexity_delta_lines": 121,
+  "hypothesis": "A large architectural change improves validation efficiency.",
+  "checks": {
+    "repeatability": "pass",
+    "held_out_robustness": "unknown",
+    "failure_mode_review": "unknown",
+    "human_comprehensibility": "fail"
+  }
+}

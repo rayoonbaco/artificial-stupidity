@@ -1,0 +1,15 @@
+{
+  "checks": {
+    "failure_mode_review": "unknown",
+    "held_out_robustness": "unknown",
+    "human_comprehensibility": "unknown",
+    "repeatability": "unknown"
+  },
+  "commit": "replace-with-candidate-commit",
+  "complexity_delta_lines": 0,
+  "disconfirming_result": "State the observation that would overturn the hypothesis.",
+  "hypothesis": "State the expected mechanism before the run.",
+  "peak_vram_mb": 45220.0,
+  "run_status": "ok",
+  "val_bpb": 0.9932
+}

@@ -1,0 +1,32 @@
+test_builds_candidate_without_inventing_evidence (test_as_gate.ArtificialStupidityGateTests) ... ok
+test_escalates_missing_falsifiability_statement (test_as_gate.ArtificialStupidityGateTests) ... ok
+test_escalates_missing_noncritical_required_evidence (test_as_gate.ArtificialStupidityGateTests) ... ok
+test_escalates_unknown_critical_evidence (test_as_gate.ArtificialStupidityGateTests) ... ok
+test_escalates_untrusted_input_in_cli_contract (test_as_gate.ArtificialStupidityGateTests) ... ok
+test_keeps_supported_improvement (test_as_gate.ArtificialStupidityGateTests) ... ok
+test_parses_upstream_run_summary (test_as_gate.ArtificialStupidityGateTests) ... ok
+test_rejects_boolean_complexity_input_as_untrusted (test_as_gate.ArtificialStupidityGateTests) ... ok
+test_rejects_failed_critical_check (test_as_gate.ArtificialStupidityGateTests) ... ok
+test_rejects_invalid_check_configuration (test_as_gate.ArtificialStupidityGateTests) ... ok
+test_rejects_metric_regression (test_as_gate.ArtificialStupidityGateTests) ... ok
+test_rejects_missing_complexity_input_as_untrusted (test_as_gate.ArtificialStupidityGateTests) ... ok
+test_rejects_negative_complexity_input_as_untrusted (test_as_gate.ArtificialStupidityGateTests) ... ok
+test_rejects_unsafe_numeric_configuration (test_as_gate.ArtificialStupidityGateTests) ... ok
+test_challenged_keep_distinguishes_failure_from_uncertainty (test_compare_loops.BenchmarkComparisonTests) ... ok
+test_original_rule_only_uses_completion_and_primary_metric (test_compare_loops.BenchmarkComparisonTests) ... ok
+test_rejects_empty_experiment_manifest (test_compare_loops.BenchmarkComparisonTests) ... ok
+test_same_sequence_produces_expected_comparison (test_compare_loops.BenchmarkComparisonTests) ... ok
+test_candidate_has_exactly_one_functional_diff (test_h100_evidence.H100EvidenceTests) ... ok
+test_failed_complete_run_fails_failure_review (test_h100_evidence.H100EvidenceTests) ... ok
+test_failure_package_contains_checksum_manifest (test_h100_evidence.H100EvidenceTests) ... ok
+test_holdout_overlap_fails_critical_check (test_h100_evidence.H100EvidenceTests) ... ok
+test_holdout_storage_is_outside_upstream_data (test_h100_evidence.H100EvidenceTests) ... ok
+test_incomplete_runs_do_not_invent_evidence (test_h100_evidence.H100EvidenceTests) ... ok
+test_nonoverlapping_wins_pass_empirical_checks (test_h100_evidence.H100EvidenceTests) ... ok
+test_parses_final_training_metrics (test_h100_evidence.H100EvidenceTests) ... ok
+test_runner_entrypoint_can_import_gate_outside_project_directory (test_h100_evidence.H100EvidenceTests) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 0.050s
+
+OK

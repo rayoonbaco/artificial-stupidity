@@ -1,0 +1,15 @@
+{
+  "commit": "candidate",
+  "run_status": "ok",
+  "val_bpb": 0.999100,
+  "peak_vram_mb": 45220.0,
+  "complexity_delta_lines": 18,
+  "hypothesis": "A small optimizer change improves validation efficiency.",
+  "disconfirming_result": "The validation metric fails to improve over the accepted baseline.",
+  "checks": {
+    "repeatability": "pass",
+    "held_out_robustness": "pass",
+    "failure_mode_review": "pass",
+    "human_comprehensibility": "pass"
+  }
+}

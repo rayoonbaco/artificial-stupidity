@@ -1,0 +1,12 @@
+{
+  "commit": "replace-with-candidate-commit",
+  "run_status": "ok",
+  "hypothesis": "State the expected mechanism before the run.",
+  "disconfirming_result": "State the observation that would overturn the hypothesis.",
+  "checks": {
+    "repeatability": "unknown",
+    "held_out_robustness": "unknown",
+    "failure_mode_review": "unknown",
+    "human_comprehensibility": "unknown"
+  }
+}

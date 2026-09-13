@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "minimum_val_bpb_improvement": 0.000001,
+  "maximum_memory_growth_fraction": 0.15,
+  "maximum_complexity_delta_lines": 80,
+  "required_checks": [
+    "repeatability",
+    "held_out_robustness",
+    "failure_mode_review",
+    "human_comprehensibility"
+  ],
+  "critical_checks": [
+    "held_out_robustness",
+    "failure_mode_review"
+  ],
+  "minimum_evidence_coverage": 0.75,
+  "escalate_on_unknown_critical_check": true,
+  "escalate_on_unknown_required_check": true,
+  "require_falsifiable_hypothesis": true
+}

@@ -1,0 +1,16 @@
+{
+  "action": "ESCALATE",
+  "facts": {
+    "baseline_val_bpb": 0.9979,
+    "candidate_val_bpb": 0.9932,
+    "complexity_delta_lines": 0,
+    "evidence_coverage": 0.0,
+    "memory_growth_fraction": 0.003546,
+    "val_bpb_improvement": 0.0047
+  },
+  "reasons": [
+    "critical evidence is unknown: failure_mode_review, held_out_robustness",
+    "evidence coverage 0% is below the required 75%"
+  ],
+  "warnings": []
+}
