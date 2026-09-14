@@ -107,3 +107,9 @@ Artificial Stupidity is a working research prototype. It is not peer reviewed, p
 ## License
 
 MIT. See [`LICENSE`](LICENSE) and [`UPSTREAM_LICENSE_NOTICE.md`](UPSTREAM_LICENSE_NOTICE.md).
+
+## Build clock
+
+This project moved from a precursor joke to a defined build in approximately 24 hours, then to a tested and independently CI-verified hardened prototype in approximately 52 hours. The clock remains open until the first complete external submission is sent.
+
+[See the contemporaneous milestone ledger](docs/BUILD_CLOCK.md).
