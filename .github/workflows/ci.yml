@@ -30,5 +30,7 @@ jobs:
           cmp /tmp/v091_failure_receipt.json benchmark/adversarial/v091_failure_receipt.json
       - name: Run frozen v0.9.2 adversarial campaign
         run: python tools/run_adversarial_campaign.py
+      - name: Run frozen Bill X-Ray second-domain validation
+        run: python tools/run_bill_xray_second_domain.py
       - name: Verify repository manifest
         run: sha256sum -c INTEGRITY_SHA256.txt

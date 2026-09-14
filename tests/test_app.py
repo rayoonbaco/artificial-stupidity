@@ -39,6 +39,16 @@ class WebApplicationTests(unittest.TestCase):
         self.assertEqual(response.headers["X-Frame-Options"], "DENY")
         self.assertIn("default-src 'self'", response.headers["Content-Security-Policy"])
 
+    def test_second_domain_result_and_limit_are_public(self):
+        response = self.client.get("/")
+        page = response.get_data(as_text=True)
+        self.assertEqual(response.status_code, 200)
+        for action in ("KEEP", "REJECT", "ESCALATE"):
+            self.assertIn(action, page)
+        self.assertIn("SECOND-DOMAIN VALIDATION", page)
+        self.assertIn("not legal advice", page)
+        self.assertIn("independent reproduction", page)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -6,7 +6,7 @@
 
 Artificial Stupidity is an experimental evidence gate for autonomous AI research. It adds a separate acceptance boundary around Andrej Karpathy's `autoresearch` loop so a promising metric cannot quietly certify itself. The gate can return `KEEP`, `REJECT`, or `ESCALATE` based on repeatability, protected-holdout performance, resource use, critical failures, and human review.
 
-This repository contains the working prototype, 55 automated tests, a reproducible six-run H100 protocol, complete raw logs, source snapshots, SHA-256 manifests, a separately recorded machine decision, a named human authorization, and preserved before/after adversarial receipts.
+This repository contains the working prototype, 73 automated tests, a reproducible six-run H100 protocol, complete raw logs, source snapshots, SHA-256 manifests, a separately recorded machine decision, a named human authorization, preserved before/after adversarial receipts, and a frozen second-domain validation using Bill X-Ray legislative claims.
 
 ## The result in one glance
 
@@ -47,6 +47,7 @@ It does **not** establish that the candidate is universally better, that the gat
 4. Verify the raw evidence with the nested `SHA256SUMS.txt` and the repository-wide `INTEGRITY_SHA256.txt`.
 5. Run the local tests.
 6. Inspect the frozen [`v0.9.2 adversarial plan`](docs/ADVERSARIAL_TEST_PLAN_v0.9.2.md), the preserved [`v0.9.1 failure receipt`](benchmark/adversarial/v091_failure_receipt.json), and the [`v0.9.2 campaign receipt`](benchmark/adversarial/v092_campaign_receipt.json).
+7. Inspect the pre-implementation [`Bill X-Ray contract`](docs/BILL_XRAY_SECOND_DOMAIN_CONTRACT_v0.9.3.md), [`results`](docs/BILL_XRAY_SECOND_DOMAIN_RESULTS_v0.9.3.md), and machine-readable [`receipt`](benchmark/second_domain_bill_xray/machine_receipt.json).
 
 ## Run locally without a GPU
 
@@ -77,10 +78,11 @@ The harness runs B1/C1/B2/C2/B3/C3, evaluates the pinned validation shard and se
 |---|---|
 | `gate/` | Independent KEEP / REJECT / ESCALATE decision logic |
 | `benchmark/` | Comparison tools, protocol, reports, and preserved evidence |
+| `benchmark/second_domain_bill_xray/` | Frozen legislative-claim cases, separate adapter, source record, and receipt |
 | `benchmark/evidence/h100_sxm_20260913/original/raw_logs/` | Unedited run logs |
 | `benchmark/evidence/h100_sxm_20260913/original/source_snapshot/` | Code and configuration captured with the experiment |
 | `benchmark/evidence/h100_sxm_20260913/repaired_decision/` | Transparent post-run import repair and final records |
-| `tests/` | 55 CPU-only tests, including 16 frozen adversarial and control cases |
+| `tests/` | 73 CPU-only tests, including frozen adversarial, portability, and public-disclosure cases |
 | `docs/` | Dossier, executive summary, audit, build clock, and adversarial reports |
 | `launch/` | Public launch copy, case study, claims, and commercial boundary |
 
@@ -105,6 +107,10 @@ Concept, framing, project direction, and human authorization: **Raymond Anthony 
 **MONAHINGA™** is used as the source identity for this evidence project. USPTO serial 99613654 is live/pending; registration has not issued. Use of the mark does not authenticate the research or create ownership over facts, methods, code inherited under license, or historical events.
 
 Artificial Stupidity is a working research prototype. It is not peer reviewed, production hardened, or a substitute for qualified technical, legal, safety, or domain review.
+
+## Second-domain result
+
+The doctrine has also been exercised against three predeclared Bill X-Ray legislative claims. It kept a source-supported statutory statement, rejected a contradicted mandate-and-funding overclaim, and escalated an unsupported contractor-outcome forecast. This is initial same-team portability evidence—not legal advice, independent reproduction, an error-rate estimate, or proof of general AI safety.
 
 ## License
 

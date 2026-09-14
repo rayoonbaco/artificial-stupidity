@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "frozen_contract_sha256": "3cb59bdddef1b146346b3651e25f3e2ee3ba62d1fb5139996132854905c32f5d",
+  "cases": [
+    {
+      "id": "BX01",
+      "claim_file": "claims/bx01_supported.json",
+      "expected_action": "KEEP",
+      "checks": {
+        "official_source_authority": "pass",
+        "current_law_status": "pass",
+        "statutory_text_match": "pass",
+        "scope_boundary": "pass",
+        "external_outcome_evidence": "not_applicable"
+      }
+    },
+    {
+      "id": "BX02",
+      "claim_file": "claims/bx02_contradicted.json",
+      "expected_action": "REJECT",
+      "checks": {
+        "official_source_authority": "pass",
+        "current_law_status": "pass",
+        "statutory_text_match": "fail",
+        "scope_boundary": "fail",
+        "external_outcome_evidence": "not_applicable"
+      }
+    },
+    {
+      "id": "BX03",
+      "claim_file": "claims/bx03_outcome_unknown.json",
+      "expected_action": "ESCALATE",
+      "checks": {
+        "official_source_authority": "pass",
+        "current_law_status": "pass",
+        "statutory_text_match": "pass",
+        "scope_boundary": "pass",
+        "external_outcome_evidence": "unknown"
+      }
+    }
+  ]
+}

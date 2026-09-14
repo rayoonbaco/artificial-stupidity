@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "required_checks": [
+    "official_source_authority",
+    "current_law_status",
+    "statutory_text_match",
+    "scope_boundary",
+    "external_outcome_evidence"
+  ],
+  "critical_checks": [
+    "official_source_authority",
+    "current_law_status",
+    "statutory_text_match",
+    "scope_boundary"
+  ],
+  "trusted_authorities": [
+    "Illinois General Assembly"
+  ],
+  "trusted_source_urls": [
+    "https://www.ilga.gov/Legislation/PublicActs/PrinterFriendly/103-0491",
+    "https://www.ilga.gov/Legislation/PublicActs/PrinterFriendly/104-0395",
+    "https://www.ilga.gov/documents/legislation/ilcs/documents/006500050K11-39.2-25.htm"
+  ],
+  "trusted_producers": {
+    "official_source_authority": ["ilga-source-inspector-v1"],
+    "current_law_status": ["ilga-source-inspector-v1"],
+    "statutory_text_match": ["as-bill-xray-gate-harness-v1"],
+    "scope_boundary": ["as-bill-xray-gate-harness-v1"],
+    "external_outcome_evidence": ["as-bill-xray-gate-harness-v1"]
+  }
+}

@@ -1,0 +1,23 @@
+Artificial Stupidity v0.9.3 verification record
+Recorded: 2026-09-14 UTC
+
+Bill X-Ray protected baseline
+Command: python -m unittest discover -s tests -v
+Result: Ran 105 tests in 0.101s — OK
+Repository: https://github.com/rayoonbaco/Bill_XRay_Next
+Inspected commit: 5462bab5717bc4b9459aee195616652b8c47089b
+
+Artificial Stupidity complete CPU suite
+Command: python -m unittest discover -s tests -v
+Result: Ran 73 tests in 0.091s — OK
+
+Second-domain frozen matrix
+Command: python tools/run_bill_xray_second_domain.py
+Result: PASS
+BX01 expected KEEP, observed KEEP
+BX02 expected REJECT, observed REJECT
+BX03 expected ESCALATE, observed ESCALATE
+
+Interpretation limit
+These are local deterministic test results, not legal advice, an independent
+reproduction, a real-world error-rate estimate, or proof of general AI safety.

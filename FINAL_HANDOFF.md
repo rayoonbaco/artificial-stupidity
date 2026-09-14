@@ -2,7 +2,7 @@
 
 ## What you have
 
-This is the v0.9.2 adversarial-hardening candidate for **ARTIFICIAL STUPIDITY - A MONAHINGA™ Evidence Project**. It includes the working gate, 55 passing tests, frozen before/after adversarial receipts, updated second-edition source documents, raw H100 evidence, hashes, source snapshots, repair provenance, separate machine and human decision records, and a complete LinkedIn launch package.
+This is the v0.9.3 second-domain-validation candidate for **ARTIFICIAL STUPIDITY - A MONAHINGA™ Evidence Project**. It includes the working gate, 73 passing tests, frozen before/after adversarial receipts, a frozen Bill X-Ray portability contract and receipt, second-edition source documents, raw H100 evidence, hashes, source snapshots, repair provenance, separate machine and human decision records, and a complete LinkedIn launch package.
 
 ## The bounded result
 
@@ -18,6 +18,7 @@ The machine returned **ESCALATE** because human comprehensibility was intentiona
 4. `benchmark/evidence/h100_sxm_20260913/repaired_decision/VERIFIED_RESULT.md`
 5. `launch/LINKEDIN_LAUNCH_PACKAGE.md`
 6. `launch/CLAIMS_LEDGER.md`
+7. `docs/BILL_XRAY_SECOND_DOMAIN_RESULTS_v0.9.3.md`
 
 ## Verify
 
@@ -29,12 +30,14 @@ sha256sum -c INTEGRITY_SHA256.txt
 
 Windows users can double-click `START_ARTIFICIAL_STUPIDITY.bat` for the guided local demonstration.
 
-## Publish the v0.9.2 adversarial-hardening update
+## Publish the v0.9.3 second-domain-validation update
 
 1. Preserve the existing `v0.9.0-evidence-prototype` release unchanged.
-2. Replace the working repository files with this complete package.
-3. Commit as `Harden evidence trust boundary` and push to `main`.
-4. Confirm the CPU verification workflow passes on Python 3.10 and 3.12.
-5. Publish a separate `v0.9.2-adversarial-hardening` prerelease.
+2. Preserve the existing `v0.9.2-adversarial-hardening` prerelease unchanged.
+3. Replace the working repository files with this complete package.
+4. Commit as `Add Bill X-Ray second-domain validation` and push to `main`.
+5. Confirm the CPU verification workflow passes on Python 3.10 and 3.12.
+6. Confirm the public site shows the Bill X-Ray KEEP / REJECT / ESCALATE section.
+7. Publish a separate `v0.9.3-second-domain-validation` prerelease.
 
 The repository is public research software, not a safety certification. Paid services may be offered around private deployment, integrations, custom evidence rules, audit-ready reporting, and support.

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "authority": "Illinois General Assembly",
+  "retrieved_utc": "2026-09-14",
+  "current_law_checked_through": "P.A. 104-0395, effective 2025-07-01",
+  "official_urls": [
+    "https://www.ilga.gov/Legislation/PublicActs/PrinterFriendly/103-0491",
+    "https://www.ilga.gov/Legislation/PublicActs/PrinterFriendly/104-0395",
+    "https://www.ilga.gov/documents/legislation/ilcs/documents/006500050K11-39.2-25.htm"
+  ],
+  "paraphrased_findings": [
+    {
+      "source": "P.A. 103-0491",
+      "section": "65 ILCS 5/11-39.2-15(a)",
+      "summary": "A municipality may enter into design-build contracts. When it elects to use that delivery method, it must issue advance notice before the request for proposal."
+    },
+    {
+      "source": "P.A. 104-0395",
+      "section": "65 ILCS 5/11-39.2-25(b)",
+      "summary": "The ordinary shortlist is no fewer than two and no more than six. If a municipality receives one Phase I response, it may proceed with Phase II for that respondent when, in its discretion, it finds proceeding to be in its best interest."
+    }
+  ],
+  "limits": [
+    "The sources establish legal authority and procedure, not municipal adoption or project demand.",
+    "They do not establish a contractor's future win rate or market outcome.",
+    "This receipt is not legal advice."
+  ]
+}

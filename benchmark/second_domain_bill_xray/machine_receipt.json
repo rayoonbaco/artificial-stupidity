@@ -1,0 +1,82 @@
+{
+  "actions_observed": [
+    "ESCALATE",
+    "KEEP",
+    "REJECT"
+  ],
+  "all_expected_actions_observed": true,
+  "case_count": 3,
+  "domain": "Bill X-Ray / Illinois SB 1570 legislative claims",
+  "frozen_contract_sha256": "3cb59bdddef1b146346b3651e25f3e2ee3ba62d1fb5139996132854905c32f5d",
+  "interpretation_limit": "A deterministic three-case portability test, not legal advice, an error-rate estimate, independent reproduction, or proof of general AI safety.",
+  "policy_sha256": "b097dbbe98e0419401852013a3737dedf6c762e6e5daecc6c4e83383681f23f5",
+  "rows": [
+    {
+      "claim_sha256": "33c9a6f877e308debeb29ee8bcade15e6ae117aff2bc480fe1449a8f367deeb6",
+      "decision": {
+        "action": "KEEP",
+        "facts": {
+          "claim_id": "BX01",
+          "claim_scope": "statutory_text",
+          "evidence_coverage": 1.0,
+          "source_authority": "Illinois General Assembly",
+          "source_checked_through": "P.A. 104-0395, effective 2025-07-01"
+        },
+        "reasons": [
+          "all delegated publication checks passed"
+        ]
+      },
+      "evidence_sha256": "b68ba7ecc44fd6fb2504fb4cd39e6dbfe8b67620b39bd318a3f4d3b62d7983f4",
+      "expected_action": "KEEP",
+      "id": "BX01",
+      "observed_action": "KEEP",
+      "status": "PASS"
+    },
+    {
+      "claim_sha256": "931968312545a06b49b9daa77f04138b5280954866d76893d772392b806453e9",
+      "decision": {
+        "action": "REJECT",
+        "facts": {
+          "claim_id": "BX02",
+          "claim_scope": "statutory_text",
+          "evidence_coverage": 1.0,
+          "source_authority": "Illinois General Assembly",
+          "source_checked_through": "P.A. 104-0395, effective 2025-07-01"
+        },
+        "reasons": [
+          "critical evidence failed: scope_boundary, statutory_text_match",
+          "declared falsifier: The law merely authorizes municipalities to elect design-build and contains no project appropriation or pipeline guarantee."
+        ]
+      },
+      "evidence_sha256": "348f4840460678edb36f168c406ed343f5845b9ea02d030ac67482cbb202ad19",
+      "expected_action": "REJECT",
+      "id": "BX02",
+      "observed_action": "REJECT",
+      "status": "PASS"
+    },
+    {
+      "claim_sha256": "f8d7ca059f112efb62fb7cea20fa634596c3fc2adf204dcc09240a2ef80dc337",
+      "decision": {
+        "action": "ESCALATE",
+        "facts": {
+          "claim_id": "BX03",
+          "claim_scope": "external_outcome",
+          "evidence_coverage": 0.8,
+          "source_authority": "Illinois General Assembly",
+          "source_checked_through": "P.A. 104-0395, effective 2025-07-01"
+        },
+        "reasons": [
+          "required evidence is unknown: external_outcome_evidence"
+        ]
+      },
+      "evidence_sha256": "e71103cad1525dbb3ef14a8d9c3d7908dad81149f5f4785c4fb66491c3e40ac9",
+      "expected_action": "ESCALATE",
+      "id": "BX03",
+      "observed_action": "ESCALATE",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": 1,
+  "source_sha256": "899a683d797ebe079c3138d29b39d08885a81f14927f35416ffc648f44d6b966",
+  "subject": "Artificial Stupidity doctrine second-domain validation"
+}

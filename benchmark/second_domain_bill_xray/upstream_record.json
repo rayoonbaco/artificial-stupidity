@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/rayoonbaco/Bill_XRay_Next",
+  "commit": "5462bab5717bc4b9459aee195616652b8c47089b",
+  "snapshot_sha256": "fd7295e0e936cb32a107dd255336bd2584b47579539ba3860f0229b5277f7f3b",
+  "snapshot_filename": "Bill_XRay_Next-main (2).zip",
+  "inspected_utc": "2026-09-14",
+  "baseline_tests": 105,
+  "baseline_result": "PASS",
+  "license_file_present": false,
+  "reuse_boundary": "No Bill X-Ray code copied or modified; only provenance and independently verified official-source facts are recorded."
+}
