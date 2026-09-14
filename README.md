@@ -6,7 +6,7 @@
 
 Artificial Stupidity is an experimental evidence gate for autonomous AI research. It adds a separate acceptance boundary around Andrej Karpathy's `autoresearch` loop so a promising metric cannot quietly certify itself. The gate can return `KEEP`, `REJECT`, or `ESCALATE` based on repeatability, protected-holdout performance, resource use, critical failures, and human review.
 
-This repository contains the working prototype, 73 automated tests, a reproducible six-run H100 protocol, complete raw logs, source snapshots, SHA-256 manifests, a separately recorded machine decision, a named human authorization, preserved before/after adversarial receipts, and a frozen second-domain validation using Bill X-Ray legislative claims.
+This repository contains the working prototype, 74 automated tests, a reproducible six-run H100 protocol, complete raw logs, source snapshots, SHA-256 manifests, a separately recorded machine decision, a named human authorization, preserved before/after adversarial receipts, and a frozen second-domain validation using Bill X-Ray legislative claims.
 
 ## The result in one glance
 
@@ -82,7 +82,7 @@ The harness runs B1/C1/B2/C2/B3/C3, evaluates the pinned validation shard and se
 | `benchmark/evidence/h100_sxm_20260913/original/raw_logs/` | Unedited run logs |
 | `benchmark/evidence/h100_sxm_20260913/original/source_snapshot/` | Code and configuration captured with the experiment |
 | `benchmark/evidence/h100_sxm_20260913/repaired_decision/` | Transparent post-run import repair and final records |
-| `tests/` | 73 CPU-only tests, including frozen adversarial, portability, and public-disclosure cases |
+| `tests/` | 74 CPU-only tests, including frozen adversarial, portability, and public-disclosure cases |
 | `docs/` | Dossier, executive summary, audit, build clock, and adversarial reports |
 | `launch/` | Public launch copy, case study, claims, and commercial boundary |
 
@@ -118,6 +118,8 @@ MIT. See [`LICENSE`](LICENSE) and [`UPSTREAM_LICENSE_NOTICE.md`](UPSTREAM_LICENS
 
 ## Build clock
 
-This project moved from a precursor joke to a defined build in approximately 24 hours, then to a tested prototype verified on GitHub-hosted CI in approximately 52 hours. The clock remains open until the first complete external submission is sent.
+This project moved from a precursor joke to a defined build in approximately 24 hours, then to a tested prototype verified on GitHub-hosted CI in approximately 52 hours. The clock stopped at approximately hour 55 when the first complete external-review submission was sent on September 14, 2026 at 3:03 PM EDT. That is approximately 31 hours from the defined build project.
 
-[See the contemporaneous milestone ledger](docs/BUILD_CLOCK.md).
+The external review is **pending**. Sending a packet is not a completed review, reproduction, endorsement, or validation.
+
+[See the contemporaneous milestone ledger](docs/BUILD_CLOCK.md) and [submission record](docs/EXTERNAL_REVIEW_SUBMISSION_2026-09-14.md).

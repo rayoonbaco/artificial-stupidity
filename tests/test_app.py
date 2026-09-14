@@ -49,6 +49,16 @@ class WebApplicationTests(unittest.TestCase):
         self.assertIn("not legal advice", page)
         self.assertIn("independent reproduction", page)
 
+    def test_stopped_build_clock_and_pending_review_are_public(self):
+        response = self.client.get("/")
+        page = response.get_data(as_text=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("BUILD CLOCK · STOPPED", page)
+        self.assertIn("≈55 hours", page)
+        self.assertIn("≈31 hours", page)
+        self.assertIn("REVIEW STATUS: PENDING", page)
+        self.assertIn("Submission is not completed review", page)
+
 
 if __name__ == "__main__":
     unittest.main()

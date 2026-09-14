@@ -1,5 +1,13 @@
 # Publication changelog
 
+## External-review submission — September 14, 2026
+
+- Sent the complete v0.9.3 external reviewer packet to Santiago Maniches of Topologica LLC at 3:03 PM EDT.
+- Stopped the documented build clock at the predeclared event: first complete external submission sent.
+- Recorded the approximate elapsed time as 55 hours from the precursor conversation and 31 hours from the defined build project.
+- Marked the review state as pending; the submission is not represented as a completed review, reproduction, endorsement, or validation.
+- Preserved the packet filename and SHA-256 digest in `docs/EXTERNAL_REVIEW_SUBMISSION_2026-09-14.md`.
+
 ## v0.9.3 second-domain validation — September 14, 2026
 
 - Froze the Bill X-Ray portability contract before adapter implementation.
