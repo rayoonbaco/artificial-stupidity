@@ -182,12 +182,13 @@ def evaluate_run_sets(
             ),
         }
     evidence_bundle = None
-    if candidate_record is not None:
+    if candidate_record is not None and baseline_record is not None:
         producers = {
             name: {"role": "independent_harness", "id": "h100-evidence-runner"}
             for name in summary["checks"]
         }
         evidence_bundle = build_evidence_bundle(
+            baseline_record,
             candidate_record,
             load_json(ROOT / "gate" / "gate_config.json"),
             summary["checks"],

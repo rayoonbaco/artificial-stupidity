@@ -33,6 +33,7 @@ the protected evidence record, and the `train.py` diff:
 python gate/build_candidate.py \
   --run-log run.log \
   --evidence gate/examples/evidence_template.json \
+  --baseline baseline.json \
   --base-ref <accepted-commit> \
   --output candidate.json \
   --evidence-output evidence-bundle.json
@@ -47,11 +48,12 @@ python gate/as_gate.py \
 `build_candidate.py` deliberately keeps candidate facts separate from the
 evidence bundle and preserves `unknown` evidence. The gate rejects candidate
 records containing reserved check or authorization fields, verifies that the
-evidence is bound to the candidate and policy hashes, and requires a separately
-hashed human-review artifact before `human_comprehensibility` can pass.
+evidence is bound to baseline, candidate, and policy hashes, enforces configured
+producer allowlists and core policy floors, rejects ambiguous JSON, and requires
+a bound human-review payload before `human_comprehensibility` can pass.
 
 This is a research prototype, not a safety certification system. Hash binding
-detects accidental or after-the-fact substitution but does not authenticate an
-attacker who controls every file. A serious deployment must also isolate the
-policy and evidence producer through permissions, signatures, or a separate
-service.
+detects substitution but producer IDs are allowlisted labels, not cryptographic
+identities. An attacker who controls every file can still forge the records. A
+serious deployment must isolate or authenticate the policy, evidence producer,
+and human reviewer through permissions, signatures, or a separate service.

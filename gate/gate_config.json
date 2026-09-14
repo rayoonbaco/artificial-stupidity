@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "minimum_val_bpb_improvement": 0.000001,
   "maximum_memory_growth_fraction": 0.15,
   "maximum_complexity_delta_lines": 80,
@@ -13,6 +13,33 @@
     "held_out_robustness",
     "failure_mode_review"
   ],
+  "trusted_producers": {
+    "repeatability": [
+      {"role": "independent_harness", "id": "demo-harness-v1"},
+      {"role": "independent_harness", "id": "h100-v0.9.0-replay"},
+      {"role": "independent_harness", "id": "h100-evidence-runner"},
+      {"role": "independent_harness", "id": "synthetic-comparison-harness"}
+    ],
+    "held_out_robustness": [
+      {"role": "independent_harness", "id": "demo-harness-v1"},
+      {"role": "independent_harness", "id": "h100-v0.9.0-replay"},
+      {"role": "independent_harness", "id": "h100-evidence-runner"},
+      {"role": "independent_harness", "id": "synthetic-comparison-harness"}
+    ],
+    "failure_mode_review": [
+      {"role": "independent_harness", "id": "demo-harness-v1"},
+      {"role": "independent_harness", "id": "h100-v0.9.0-replay"},
+      {"role": "independent_harness", "id": "h100-evidence-runner"},
+      {"role": "independent_harness", "id": "synthetic-comparison-harness"}
+    ],
+    "human_comprehensibility": [
+      {"role": "independent_harness", "id": "demo-harness-v1"},
+      {"role": "independent_harness", "id": "h100-v0.9.0-replay"},
+      {"role": "independent_harness", "id": "h100-evidence-runner"},
+      {"role": "human_reviewer", "id": "demonstration-reviewer"},
+      {"role": "human_reviewer", "id": "synthetic-reviewer"}
+    ]
+  },
   "minimum_evidence_coverage": 0.75,
   "escalate_on_unknown_critical_check": true,
   "escalate_on_unknown_required_check": true,

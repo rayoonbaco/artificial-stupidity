@@ -6,7 +6,7 @@ authors:
   - family-names: Gomez
     given-names: Raymond Anthony
 date-released: 2026-09-14
-version: 0.9.1
+version: 0.9.2
 license: MIT
 abstract: "A working KEEP, REJECT, or ESCALATE evidence gate around an autonomous AI research loop, with a predeclared six-run H100 protected-holdout demonstration and separate human authorization."
 repository-code: "https://github.com/rayoonbaco/artificial-stupidity"

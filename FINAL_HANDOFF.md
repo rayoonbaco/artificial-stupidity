@@ -2,7 +2,7 @@
 
 ## What you have
 
-This is the v0.9.1 hardening candidate for **ARTIFICIAL STUPIDITY - A MONAHINGA™ Evidence Project**. It includes the working gate, 36 defined tests, updated second-edition source documents, raw H100 evidence, hashes, source snapshots, repair provenance, separate machine and human decision records, and a complete LinkedIn launch package.
+This is the v0.9.2 adversarial-hardening candidate for **ARTIFICIAL STUPIDITY - A MONAHINGA™ Evidence Project**. It includes the working gate, 55 passing tests, frozen before/after adversarial receipts, updated second-edition source documents, raw H100 evidence, hashes, source snapshots, repair provenance, separate machine and human decision records, and a complete LinkedIn launch package.
 
 ## The bounded result
 
@@ -29,12 +29,12 @@ sha256sum -c INTEGRITY_SHA256.txt
 
 Windows users can double-click `START_ARTIFICIAL_STUPIDITY.bat` for the guided local demonstration.
 
-## Publish the v0.9.1 hardening update
+## Publish the v0.9.2 adversarial-hardening update
 
 1. Preserve the existing `v0.9.0-evidence-prototype` release unchanged.
 2. Replace the working repository files with this complete package.
 3. Commit as `Harden evidence trust boundary` and push to `main`.
 4. Confirm the CPU verification workflow passes on Python 3.10 and 3.12.
-5. Publish a separate `v0.9.1-hardening` prerelease.
+5. Publish a separate `v0.9.2-adversarial-hardening` prerelease.
 
 The repository is public research software, not a safety certification. Paid services may be offered around private deployment, integrations, custom evidence rules, audit-ready reporting, and support.

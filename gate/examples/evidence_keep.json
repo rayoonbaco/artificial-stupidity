@@ -1,21 +1,44 @@
 {
-  "schema_version": 1,
-  "candidate_sha256": "d09c574ce82b44a280a03dd8d4d49a6e2108cf8abb82e8800b6981b5d4029d6f",
-  "policy_sha256": "b56bc7ede2f3fe3db149a8dc10de33ae1f3a2f19d448f000a58c28b748b128f8",
-  "checks": {
-    "repeatability": "pass",
-    "held_out_robustness": "pass",
-    "failure_mode_review": "pass",
-    "human_comprehensibility": "pass"
-  },
-  "producers": {
-    "repeatability": {"role": "independent_harness", "id": "demo-harness-v1"},
-    "held_out_robustness": {"role": "independent_harness", "id": "demo-harness-v1"},
-    "failure_mode_review": {"role": "independent_harness", "id": "demo-harness-v1"},
+  "artifacts": {
     "human_comprehensibility": {
-      "role": "human_reviewer",
-      "id": "demonstration-reviewer",
-      "artifact_sha256": "89c47d999878d6b1dd47536caccf40a9b031cf28875a6cf5134994005a2e7413"
+      "baseline_sha256": "2c0866617a47fe1ca27c09e63a6693d65443c77af51480d61544019d0561b1dc",
+      "candidate_sha256": "d09c574ce82b44a280a03dd8d4d49a6e2108cf8abb82e8800b6981b5d4029d6f",
+      "finding": "human_comprehensibility",
+      "policy_sha256": "2f2f1a921b35cd73975d4c88c616539086188ee5a86294012db2e26afa2038f9",
+      "reviewer": "demonstration-reviewer",
+      "reviewer_role": "human_reviewer",
+      "schema_version": 2,
+      "scope": "GPU-free demonstration only",
+      "state": "pass"
     }
-  }
+  },
+  "baseline_sha256": "2c0866617a47fe1ca27c09e63a6693d65443c77af51480d61544019d0561b1dc",
+  "candidate_sha256": "d09c574ce82b44a280a03dd8d4d49a6e2108cf8abb82e8800b6981b5d4029d6f",
+  "checks": {
+    "failure_mode_review": "pass",
+    "held_out_robustness": "pass",
+    "human_comprehensibility": "pass",
+    "repeatability": "pass"
+  },
+  "policy_sha256": "2f2f1a921b35cd73975d4c88c616539086188ee5a86294012db2e26afa2038f9",
+  "producers": {
+    "failure_mode_review": {
+      "id": "demo-harness-v1",
+      "role": "independent_harness"
+    },
+    "held_out_robustness": {
+      "id": "demo-harness-v1",
+      "role": "independent_harness"
+    },
+    "human_comprehensibility": {
+      "artifact_sha256": "ed5633dcb0ad0df950f361edc4b77c1cec3f7a0abfe77997daf53faa9450baf3",
+      "id": "demonstration-reviewer",
+      "role": "human_reviewer"
+    },
+    "repeatability": {
+      "id": "demo-harness-v1",
+      "role": "independent_harness"
+    }
+  },
+  "schema_version": 2
 }

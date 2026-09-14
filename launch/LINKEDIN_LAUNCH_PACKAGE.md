@@ -34,7 +34,7 @@ Artificial Stupidity is a working KEEP / REJECT / ESCALATE evidence gate around 
 
 ## Long product description
 
-Artificial Stupidity is an experimental decision boundary for autonomous AI research, built as an additive derivative of Andrej Karpathy's autoresearch. Instead of allowing a single improved metric to certify a candidate, an external gate checks repeatability, sequestered-holdout performance, resource use, critical failures, and human comprehensibility. The public package includes 36 tests, a predeclared six-run H100 experiment, complete raw logs, source snapshots, hashes, a disclosed and repaired post-run import failure, and separate machine and human decisions. It is a bounded research prototype, not a general AI-safety certification.
+Artificial Stupidity is an experimental decision boundary for autonomous AI research, built as an additive derivative of Andrej Karpathy's autoresearch. Instead of allowing a single improved metric to certify a candidate, an external gate checks repeatability, sequestered-holdout performance, resource use, critical failures, and human comprehensibility. The public package includes 55 passing tests, preserved before/after adversarial receipts, a predeclared six-run H100 experiment, complete raw logs, source snapshots, hashes, a disclosed and repaired post-run import failure, and separate machine and human decisions. It is a bounded research prototype, not a general AI-safety certification.
 
 ## LinkedIn profile project entry
 
@@ -78,7 +78,7 @@ We also preserved the messy part: after the paid runs finished, the final runner
 
 That is what this project is really about. Not pretending machines never fail. Building a process in which improvement, doubt, evidence, repair, and human authority stay visible.
 
-The public research edition includes the code, 36 tests, raw logs, source snapshots, hashes, dossier, executive summary, and reproduction protocol.
+The public research edition includes the code, 55 passing tests, adversarial receipts, raw logs, source snapshots, hashes, dossier, executive summary, and reproduction protocol.
 
 Repository: `https://github.com/rayoonbaco/artificial-stupidity`
 
@@ -98,7 +98,7 @@ I built Artificial Stupidity, an independent KEEP / REJECT / ESCALATE evidence g
 
 In a predeclared six-run H100 experiment, a one-line batch-size candidate improved median validation BPB by 0.928% and a sequestered holdout by 0.924%. Every candidate beat every baseline on both metrics. Yet the machine returned ESCALATE until a named human reviewed the evidence and authorized KEEP.
 
-The public package includes the code, 36 tests, raw logs, hashes, source snapshots, the disclosed repair of a post-run import failure, and the separate machine/human decision record.
+The public package includes the code, 55 passing tests, adversarial receipts, raw logs, hashes, source snapshots, the disclosed repair of a post-run import failure, and the separate machine/human decision record.
 
 The point is not that criticism makes AI safe. The point is that an optimizer should not hold sole authority to certify its own improvement.
 

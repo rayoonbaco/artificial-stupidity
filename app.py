@@ -2,25 +2,16 @@
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
-from typing import Any
 
 from flask import Flask, jsonify, render_template, request
 
-from gate.as_gate import evaluate
+from gate.as_gate import _load_json, evaluate
 
 
 ROOT = Path(__file__).resolve().parent
 EXAMPLES = ROOT / "gate" / "examples"
 CONFIG_PATH = ROOT / "gate" / "gate_config.json"
-
-
-def _load_json(path: Path) -> dict[str, Any]:
-    value = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(value, dict):
-        raise ValueError(f"{path.name} must contain a JSON object")
-    return value
 
 
 CONFIG = _load_json(CONFIG_PATH)

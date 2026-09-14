@@ -4,7 +4,7 @@ This is a contemporaneous elapsed-time record reported by the creator, not conti
 
 - Hour 0 - Precursor: the Claude conversation and original joke supplied the seed.
 - Hour 24 - Conception: Artificial Stupidity became a defined build project.
-- Hour 52 - Verified hardening milestone: v0.9.1 passed 36 local tests, passed GitHub CPU verification, and deployed successfully.
+- Hour 52 - Verified hardening milestone: v0.9.1 passed 36 local tests, passed GitHub-hosted CPU verification, and deployed successfully.
 - Clock status - RUNNING
 - Stop condition - the completed submission package is sent to the first external reviewer or organization.
 

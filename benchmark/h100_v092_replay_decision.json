@@ -1,0 +1,18 @@
+{
+  "action": "ESCALATE",
+  "facts": {
+    "baseline_sha256": "70db2a86c215d9e327b5395d4f0676f7c1ece896886809973780ae685d4e4e62",
+    "baseline_val_bpb": 1.000213,
+    "candidate_sha256": "ca1c346db3ee03f2a383f14460812c585712312f3d7bff41de5d21c0675803fd",
+    "candidate_val_bpb": 0.990934,
+    "complexity_delta_lines": 1,
+    "evidence_coverage": 0.75,
+    "memory_growth_fraction": -0.003373,
+    "policy_sha256": "2f2f1a921b35cd73975d4c88c616539086188ee5a86294012db2e26afa2038f9",
+    "val_bpb_improvement": 0.009279
+  },
+  "reasons": [
+    "required evidence is unknown: human_comprehensibility"
+  ],
+  "warnings": []
+}

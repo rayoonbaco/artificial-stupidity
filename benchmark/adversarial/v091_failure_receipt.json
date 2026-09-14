@@ -1,0 +1,63 @@
+{
+  "attacks_executed": 9,
+  "frozen_plan": "docs/ADVERSARIAL_TEST_PLAN_v0.9.2.md",
+  "interpretation": "These are implementation trust gaps, not measured real-world incidents.",
+  "results": [
+    {
+      "attack": "A01 baseline substitution",
+      "expected": "REFUSE",
+      "observed": "KEEP",
+      "unjustified_keep": true
+    },
+    {
+      "attack": "A04 harness impersonation",
+      "expected": "REFUSE",
+      "observed": "KEEP",
+      "unjustified_keep": true
+    },
+    {
+      "attack": "A05 reviewer impersonation",
+      "expected": "REFUSE",
+      "observed": "KEEP",
+      "unjustified_keep": true
+    },
+    {
+      "attack": "A06 unbound review digest",
+      "expected": "REFUSE",
+      "observed": "KEEP",
+      "unjustified_keep": true
+    },
+    {
+      "attack": "A08 undeclared evidence",
+      "expected": "REFUSE",
+      "observed": "KEEP",
+      "unjustified_keep": true
+    },
+    {
+      "attack": "A09 missing run status",
+      "expected": "REFUSE",
+      "observed": "KEEP",
+      "unjustified_keep": true
+    },
+    {
+      "attack": "A10 removed core policy",
+      "expected": "REFUSE",
+      "observed": "KEEP",
+      "unjustified_keep": true
+    },
+    {
+      "attack": "A11 string numeric policy",
+      "expected": "REFUSE",
+      "observed": "KEEP",
+      "unjustified_keep": true
+    },
+    {
+      "attack": "A07 duplicate JSON key",
+      "expected": "REFUSE",
+      "observed": "ACCEPTED_LAST_VALUE",
+      "unjustified_keep": false
+    }
+  ],
+  "subject": "v0.9.1 before adversarial repair",
+  "unjustified_keeps": 8
+}

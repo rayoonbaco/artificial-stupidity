@@ -12,14 +12,17 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from gate.as_gate import Decision, build_evidence_bundle, canonical_sha256, evaluate
+from gate.as_gate import (
+    Decision,
+    _load_json,
+    build_evidence_bundle,
+    canonical_sha256,
+    evaluate,
+)
 
 
 def load_object(path: str | Path) -> dict[str, Any]:
-    value = json.loads(Path(path).read_text(encoding="utf-8"))
-    if not isinstance(value, dict):
-        raise ValueError(f"{path} must contain a JSON object")
-    return value
+    return _load_json(path)
 
 
 def original_decision(baseline: dict[str, Any], candidate: dict[str, Any]) -> str:
@@ -60,20 +63,33 @@ def compare(manifest: dict[str, Any], config: dict[str, Any]) -> dict[str, Any]:
         if not isinstance(checks, dict):
             raise ValueError(f"experiment {index} checks must be an object")
         candidate_record = {key: value for key, value in candidate.items() if key != "checks"}
-        producer_id = f"synthetic-comparison-{index}"
+        producer_id = "synthetic-comparison-harness"
         producers = {
             name: {"role": "independent_harness", "id": producer_id}
             for name in checks
         }
+        artifacts: dict[str, dict[str, Any]] = {}
         if checks.get("human_comprehensibility") == "pass":
+            artifact = {
+                "schema_version": 2,
+                "reviewer": "synthetic-reviewer",
+                "reviewer_role": "human_reviewer",
+                "baseline_sha256": canonical_sha256(baseline),
+                "candidate_sha256": canonical_sha256(candidate_record),
+                "policy_sha256": canonical_sha256(config),
+                "finding": "human_comprehensibility",
+                "state": "pass",
+                "scope": "synthetic comparison fixture only",
+            }
+            artifacts["human_comprehensibility"] = artifact
             producers["human_comprehensibility"] = {
                 "role": "human_reviewer",
                 "id": "synthetic-reviewer",
-                "artifact_sha256": canonical_sha256(
-                    {"candidate": candidate_record.get("commit"), "synthetic": True}
-                ),
+                "artifact_sha256": canonical_sha256(artifact),
             }
-        evidence = build_evidence_bundle(candidate_record, config, checks, producers)
+        evidence = build_evidence_bundle(
+            baseline, candidate_record, config, checks, producers, artifacts
+        )
         upstream = original_decision(baseline, candidate_record)
         gated: Decision = evaluate(baseline, candidate_record, config, evidence)
         challenged = upstream == "KEEP" and gated.action != "KEEP"

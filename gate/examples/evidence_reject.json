@@ -1,17 +1,30 @@
 {
-  "schema_version": 1,
+  "baseline_sha256": "2c0866617a47fe1ca27c09e63a6693d65443c77af51480d61544019d0561b1dc",
   "candidate_sha256": "01886b5e7728fada8f87ac698db68057487a29c779ec2d04c4d1aab9b8f86d19",
-  "policy_sha256": "b56bc7ede2f3fe3db149a8dc10de33ae1f3a2f19d448f000a58c28b748b128f8",
   "checks": {
-    "repeatability": "pass",
-    "held_out_robustness": "pass",
     "failure_mode_review": "pass",
-    "human_comprehensibility": "unknown"
+    "held_out_robustness": "pass",
+    "human_comprehensibility": "unknown",
+    "repeatability": "pass"
   },
+  "policy_sha256": "2f2f1a921b35cd73975d4c88c616539086188ee5a86294012db2e26afa2038f9",
   "producers": {
-    "repeatability": {"role": "independent_harness", "id": "demo-harness-v1"},
-    "held_out_robustness": {"role": "independent_harness", "id": "demo-harness-v1"},
-    "failure_mode_review": {"role": "independent_harness", "id": "demo-harness-v1"},
-    "human_comprehensibility": {"role": "independent_harness", "id": "demo-harness-v1"}
-  }
+    "failure_mode_review": {
+      "id": "demo-harness-v1",
+      "role": "independent_harness"
+    },
+    "held_out_robustness": {
+      "id": "demo-harness-v1",
+      "role": "independent_harness"
+    },
+    "human_comprehensibility": {
+      "id": "demo-harness-v1",
+      "role": "independent_harness"
+    },
+    "repeatability": {
+      "id": "demo-harness-v1",
+      "role": "independent_harness"
+    }
+  },
+  "schema_version": 2
 }

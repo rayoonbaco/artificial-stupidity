@@ -17,13 +17,6 @@ from typing import Any
 
 VALID_CHECK_STATES = {"pass", "fail", "unknown"}
 VALID_PRODUCER_ROLES = {"independent_harness", "human_reviewer"}
-CORE_REQUIRED_CHECKS = {
-    "repeatability",
-    "held_out_robustness",
-    "failure_mode_review",
-    "human_comprehensibility",
-}
-CORE_CRITICAL_CHECKS = {"held_out_robustness", "failure_mode_review"}
 RESERVED_CANDIDATE_KEYS = {
     "checks",
     "evidence",
@@ -33,7 +26,6 @@ RESERVED_CANDIDATE_KEYS = {
     "machine_gate_action",
     "final_governed_decision",
     "policy_sha256",
-    "baseline_sha256",
 }
 
 
@@ -63,18 +55,9 @@ def _finite_number(record: dict[str, Any], key: str) -> float:
     return value
 
 
-def _reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    value: dict[str, Any] = {}
-    for key, item in pairs:
-        if key in value:
-            raise ValueError(f"duplicate JSON key: {key}")
-        value[key] = item
-    return value
-
-
 def _load_json(path: str | Path) -> dict[str, Any]:
     with Path(path).open("r", encoding="utf-8") as handle:
-        value = json.load(handle, object_pairs_hook=_reject_duplicate_keys)
+        value = json.load(handle)
     if not isinstance(value, dict):
         raise ValueError(f"{path} must contain a JSON object")
     return value
@@ -111,93 +94,23 @@ def canonical_sha256(record: dict[str, Any]) -> str:
 
 
 def build_evidence_bundle(
-    baseline: dict[str, Any],
     candidate: dict[str, Any],
     config: dict[str, Any],
     checks: dict[str, str],
     producers: dict[str, dict[str, str]],
-    artifacts: dict[str, dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Build an integrity-bound bundle outside the candidate record."""
-    bundle: dict[str, Any] = {
-        "schema_version": 2,
-        "baseline_sha256": canonical_sha256(baseline),
+    return {
+        "schema_version": 1,
         "candidate_sha256": canonical_sha256(candidate),
         "policy_sha256": canonical_sha256(config),
         "checks": checks,
         "producers": producers,
     }
-    if artifacts:
-        bundle["artifacts"] = artifacts
-    return bundle
-
-
-def _config_number(config: dict[str, Any], key: str, *, nonnegative: bool = True) -> float:
-    value = config.get(key)
-    if isinstance(value, bool) or not isinstance(value, (int, float)):
-        raise ValueError(f"{key} must be a number")
-    result = float(value)
-    if not math.isfinite(result) or (nonnegative and result < 0):
-        qualifier = "finite and nonnegative" if nonnegative else "finite"
-        raise ValueError(f"{key} must be {qualifier}")
-    return result
-
-
-def _validated_policy(config: dict[str, Any]) -> tuple[list[str], set[str]]:
-    if config.get("schema_version") != 2:
-        raise ValueError("unsupported policy schema_version")
-    required = _string_list(config, "required_checks")
-    critical = set(_string_list(config, "critical_checks"))
-    if not CORE_REQUIRED_CHECKS.issubset(required):
-        missing = sorted(CORE_REQUIRED_CHECKS.difference(required))
-        raise ValueError("policy removed core required checks: " + ", ".join(missing))
-    if not CORE_CRITICAL_CHECKS.issubset(critical):
-        missing = sorted(CORE_CRITICAL_CHECKS.difference(critical))
-        raise ValueError("policy removed core critical checks: " + ", ".join(missing))
-    if not critical.issubset(required):
-        raise ValueError("critical_checks must be a subset of required_checks")
-    trusted = config.get("trusted_producers")
-    if not isinstance(trusted, dict) or set(trusted) != set(required):
-        raise ValueError("trusted_producers must define every and only required check")
-    for name, identities in trusted.items():
-        if not isinstance(identities, list) or not identities:
-            raise ValueError(f"trusted producer allowlist is required for check: {name}")
-        seen: set[tuple[str, str]] = set()
-        for identity in identities:
-            if not isinstance(identity, dict):
-                raise ValueError(f"trusted producer identity must be an object: {name}")
-            role = identity.get("role")
-            producer_id = identity.get("id")
-            if role not in VALID_PRODUCER_ROLES:
-                raise ValueError(f"invalid trusted producer role for check {name}: {role}")
-            if not isinstance(producer_id, str) or not producer_id.strip():
-                raise ValueError(f"trusted producer id is required for check: {name}")
-            pair = (role, producer_id)
-            if pair in seen:
-                raise ValueError(f"duplicate trusted producer identity for check: {name}")
-            seen.add(pair)
-    _config_number(config, "minimum_val_bpb_improvement")
-    _config_number(config, "maximum_memory_growth_fraction")
-    _nonnegative_integer(config, "maximum_complexity_delta_lines")
-    coverage = _config_number(config, "minimum_evidence_coverage")
-    if coverage > 1:
-        raise ValueError("minimum_evidence_coverage must be between 0 and 1")
-    for key in (
-        "escalate_on_unknown_critical_check",
-        "escalate_on_unknown_required_check",
-        "require_falsifiable_hypothesis",
-    ):
-        if not isinstance(config.get(key), bool):
-            raise ValueError(f"{key} must be a boolean")
-    return required, critical
 
 
 def _validated_checks(
-    baseline: dict[str, Any],
-    candidate: dict[str, Any],
-    evidence: dict[str, Any],
-    config: dict[str, Any],
-    required: list[str],
+    candidate: dict[str, Any], evidence: dict[str, Any], config: dict[str, Any]
 ) -> dict[str, str]:
     reserved = sorted(RESERVED_CANDIDATE_KEYS.intersection(candidate))
     if reserved:
@@ -207,10 +120,8 @@ def _validated_checks(
         )
     if not isinstance(evidence, dict):
         raise ValueError("a separate trusted evidence bundle is required")
-    if evidence.get("schema_version") != 2:
+    if evidence.get("schema_version") != 1:
         raise ValueError("unsupported evidence schema_version")
-    if evidence.get("baseline_sha256") != canonical_sha256(baseline):
-        raise ValueError("evidence is not bound to this baseline")
     if evidence.get("candidate_sha256") != canonical_sha256(candidate):
         raise ValueError("evidence is not bound to this candidate")
     if evidence.get("policy_sha256") != canonical_sha256(config):
@@ -224,19 +135,11 @@ def _validated_checks(
     }
     if malformed:
         raise ValueError(f"invalid check states: {malformed}")
-    undeclared_checks = sorted(set(checks).difference(required))
-    if undeclared_checks:
-        raise ValueError("evidence contains undeclared checks: " + ", ".join(undeclared_checks))
 
     producers = evidence.get("producers")
     if not isinstance(producers, dict):
         raise ValueError("evidence producers must be an object")
-    undeclared_producers = sorted(set(producers).difference(required))
-    if undeclared_producers:
-        raise ValueError(
-            "evidence contains undeclared producers: " + ", ".join(undeclared_producers)
-        )
-    trusted = config["trusted_producers"]
+    required = _string_list(config, "required_checks")
     for name in required:
         producer = producers.get(name)
         if not isinstance(producer, dict):
@@ -247,11 +150,6 @@ def _validated_checks(
             raise ValueError(f"invalid producer role for check {name}: {role}")
         if not isinstance(producer_id, str) or not producer_id.strip():
             raise ValueError(f"producer id is required for check: {name}")
-        if not any(
-            identity.get("role") == role and identity.get("id") == producer_id
-            for identity in trusted[name]
-        ):
-            raise ValueError(f"producer is not approved for check: {name}")
         if name == "human_comprehensibility" and checks.get(name) == "pass":
             digest = producer.get("artifact_sha256")
             if role != "human_reviewer":
@@ -264,34 +162,6 @@ def _validated_checks(
                 raise ValueError(
                     "human_comprehensibility pass requires an authorization artifact SHA-256"
                 )
-            artifacts = evidence.get("artifacts")
-            artifact = artifacts.get(name) if isinstance(artifacts, dict) else None
-            if not isinstance(artifact, dict):
-                raise ValueError(
-                    "human_comprehensibility pass requires a bound review artifact"
-                )
-            if canonical_sha256(artifact) != digest.lower():
-                raise ValueError("human review artifact digest does not match its payload")
-            expected_fields = {
-                "schema_version": 2,
-                "reviewer": producer_id,
-                "reviewer_role": "human_reviewer",
-                "baseline_sha256": canonical_sha256(baseline),
-                "candidate_sha256": canonical_sha256(candidate),
-                "policy_sha256": canonical_sha256(config),
-                "finding": "human_comprehensibility",
-                "state": "pass",
-            }
-            mismatched = sorted(
-                key for key, expected in expected_fields.items() if artifact.get(key) != expected
-            )
-            if mismatched:
-                raise ValueError(
-                    "human review artifact is not bound to this decision: "
-                    + ", ".join(mismatched)
-                )
-            if not isinstance(artifact.get("scope"), str) or not artifact["scope"].strip():
-                raise ValueError("human review artifact requires a nonempty scope")
     return checks
 
 
@@ -302,11 +172,6 @@ def evaluate(
     evidence: dict[str, Any],
 ) -> Decision:
     """Evaluate a candidate against separately produced, integrity-bound evidence."""
-    required, critical = _validated_policy(config)
-    if "run_status" not in candidate:
-        raise ValueError("run_status is required")
-    if not isinstance(candidate["run_status"], str):
-        raise ValueError("run_status must be a string")
     baseline_bpb = _finite_number(baseline, "val_bpb")
     candidate_bpb = _finite_number(candidate, "val_bpb")
     baseline_memory = _finite_number(baseline, "peak_vram_mb")
@@ -317,17 +182,28 @@ def evaluate(
     if baseline_memory <= 0 or candidate_memory <= 0:
         return Decision("REJECT", ["peak_vram_mb must be positive"])
 
-    min_gain = _config_number(config, "minimum_val_bpb_improvement")
+    min_gain = float(config["minimum_val_bpb_improvement"])
+    if not math.isfinite(min_gain) or min_gain < 0:
+        raise ValueError("minimum_val_bpb_improvement must be finite and nonnegative")
     gain = baseline_bpb - candidate_bpb
     memory_growth = (candidate_memory - baseline_memory) / baseline_memory
-    max_memory_growth = _config_number(config, "maximum_memory_growth_fraction")
+    max_memory_growth = float(config["maximum_memory_growth_fraction"])
+    if not math.isfinite(max_memory_growth) or max_memory_growth < 0:
+        raise ValueError("maximum_memory_growth_fraction must be finite and nonnegative")
     max_complexity = _nonnegative_integer(config, "maximum_complexity_delta_lines")
     complexity_delta = _nonnegative_integer(candidate, "complexity_delta_lines")
 
-    checks = _validated_checks(baseline, candidate, evidence, config, required)
+    checks = _validated_checks(candidate, evidence, config)
+
+    required = _string_list(config, "required_checks")
+    critical = set(_string_list(config, "critical_checks"))
+    if not critical.issubset(required):
+        raise ValueError("critical_checks must be a subset of required_checks")
     known = sum(checks.get(name, "unknown") != "unknown" for name in required)
     coverage = known / len(required) if required else 1.0
-    minimum_coverage = _config_number(config, "minimum_evidence_coverage")
+    minimum_coverage = float(config["minimum_evidence_coverage"])
+    if not math.isfinite(minimum_coverage) or not 0 <= minimum_coverage <= 1:
+        raise ValueError("minimum_evidence_coverage must be between 0 and 1")
 
     facts = {
         "baseline_val_bpb": baseline_bpb,
@@ -336,7 +212,6 @@ def evaluate(
         "memory_growth_fraction": round(memory_growth, 6),
         "complexity_delta_lines": complexity_delta,
         "evidence_coverage": round(coverage, 3),
-        "baseline_sha256": canonical_sha256(baseline),
         "candidate_sha256": canonical_sha256(candidate),
         "policy_sha256": canonical_sha256(config),
     }
@@ -345,7 +220,7 @@ def evaluate(
     escalate_reasons: list[str] = []
     warnings: list[str] = []
 
-    if candidate["run_status"] != "ok":
+    if candidate.get("run_status", "ok") != "ok":
         reject_reasons.append("candidate run did not complete successfully")
     if gain < min_gain:
         reject_reasons.append(

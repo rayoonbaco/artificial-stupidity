@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from gate.as_gate import build_evidence_bundle
+from gate.as_gate import _load_json, build_evidence_bundle
 
 
 SUMMARY_FIELD = re.compile(r"^(val_bpb|peak_vram_mb):\s*([0-9]+(?:\.[0-9]+)?)\s*$")
@@ -64,6 +64,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Create a candidate record from a run")
     parser.add_argument("--run-log", required=True)
     parser.add_argument("--evidence", required=True)
+    parser.add_argument("--baseline", required=True)
     parser.add_argument("--base-ref", required=True)
     parser.add_argument("--repo", default=".")
     parser.add_argument("--output", required=True)
@@ -74,14 +75,15 @@ def main() -> int:
     args = parser.parse_args()
     repo = Path(args.repo).resolve()
     summary = parse_run_summary(Path(args.run_log).read_text(encoding="utf-8"))
-    evidence = json.loads(Path(args.evidence).read_text(encoding="utf-8"))
+    evidence = _load_json(args.evidence)
     record = build_record(summary, evidence, diff_line_count(repo, args.base_ref))
     checks = evidence.get("checks")
     producers = evidence.get("producers")
     if not isinstance(checks, dict) or not isinstance(producers, dict):
         raise ValueError("evidence input must contain checks and producers objects")
-    config = json.loads(Path(args.config).read_text(encoding="utf-8"))
-    bundle = build_evidence_bundle(record, config, checks, producers)
+    config = _load_json(args.config)
+    baseline = _load_json(args.baseline)
+    bundle = build_evidence_bundle(baseline, record, config, checks, producers)
     Path(args.output).write_text(json.dumps(record, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     Path(args.evidence_output).write_text(
         json.dumps(bundle, indent=2, sort_keys=True) + "\n", encoding="utf-8"

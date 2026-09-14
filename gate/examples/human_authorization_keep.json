@@ -1,9 +1,11 @@
 {
-  "schema_version": 1,
-  "reviewer": "demonstration-reviewer",
-  "reviewer_role": "human_reviewer",
+  "baseline_sha256": "2c0866617a47fe1ca27c09e63a6693d65443c77af51480d61544019d0561b1dc",
   "candidate_sha256": "d09c574ce82b44a280a03dd8d4d49a6e2108cf8abb82e8800b6981b5d4029d6f",
   "finding": "human_comprehensibility",
-  "state": "pass",
-  "scope": "GPU-free demonstration only"
+  "policy_sha256": "2f2f1a921b35cd73975d4c88c616539086188ee5a86294012db2e26afa2038f9",
+  "reviewer": "demonstration-reviewer",
+  "reviewer_role": "human_reviewer",
+  "schema_version": 2,
+  "scope": "GPU-free demonstration only",
+  "state": "pass"
 }

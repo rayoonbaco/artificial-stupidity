@@ -137,6 +137,28 @@ class H100EvidenceTests(unittest.TestCase):
             self.assertTrue(archive.exists())
             self.assertTrue((directory / "SHA256SUMS.txt").exists())
 
+    def test_hardened_replay_uses_protected_holdout_baseline(self):
+        root = Path(__file__).resolve().parents[1]
+        baseline = json.loads(
+            (
+                root
+                / "benchmark/evidence/h100_sxm_20260913/repaired_decision/baseline_gate_record.json"
+            ).read_text(encoding="utf-8")
+        )
+        candidate = json.loads(
+            (root / "benchmark/h100_v091_replay_candidate.json").read_text(encoding="utf-8")
+        )
+        evidence = json.loads(
+            (root / "benchmark/h100_v091_replay_evidence.json").read_text(encoding="utf-8")
+        )
+        config = json.loads(
+            (root / "gate/gate_config.json").read_text(encoding="utf-8")
+        )
+        decision = evaluate(baseline, candidate, config, evidence)
+        self.assertEqual(decision.action, "ESCALATE")
+        self.assertEqual(decision.facts["baseline_val_bpb"], 1.000213)
+        self.assertEqual(decision.facts["val_bpb_improvement"], 0.009279)
+
 
 if __name__ == "__main__":
     unittest.main()

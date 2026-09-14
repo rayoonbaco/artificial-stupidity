@@ -1,0 +1,9 @@
+{
+  "commit": "candidate",
+  "run_status": "ok",
+  "val_bpb": 0.993200,
+  "peak_vram_mb": 45220.0,
+  "complexity_delta_lines": 24,
+  "hypothesis": "A smaller attention change improves validation efficiency.",
+  "disconfirming_result": "No repeatable gain or a held-out robustness failure."
+}

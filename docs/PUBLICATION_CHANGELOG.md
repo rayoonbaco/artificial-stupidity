@@ -1,5 +1,14 @@
 # Publication changelog
 
+## v0.9.2 adversarial hardening — September 14, 2026
+
+- Froze a 16-case attack-and-control plan before repair.
+- Preserved the exact v0.9.1 gate and a machine-readable failure receipt.
+- Bound evidence to the accepted baseline as well as candidate and policy.
+- Added producer allowlists, human-review payload binding, core policy floors, strict numeric configuration, explicit run status, and duplicate-key rejection.
+- Passed 12/12 adversarial cases, 4/4 decision controls, and the complete 54-test CPU suite.
+- Preserved the limitation that allowlisted identities are not cryptographic authentication.
+
 ## v0.9.1 hardening — September 14, 2026
 
 - Separated candidate-controlled facts from trusted evidence records.

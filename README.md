@@ -6,7 +6,7 @@
 
 Artificial Stupidity is an experimental evidence gate for autonomous AI research. It adds a separate acceptance boundary around Andrej Karpathy's `autoresearch` loop so a promising metric cannot quietly certify itself. The gate can return `KEEP`, `REJECT`, or `ESCALATE` based on repeatability, protected-holdout performance, resource use, critical failures, and human review.
 
-This repository contains the working prototype, 32 automated tests, a reproducible six-run H100 protocol, complete raw logs, source snapshots, SHA-256 manifests, a separately recorded machine decision, and a named human authorization.
+This repository contains the working prototype, 55 automated tests, a reproducible six-run H100 protocol, complete raw logs, source snapshots, SHA-256 manifests, a separately recorded machine decision, a named human authorization, and preserved before/after adversarial receipts.
 
 ## The result in one glance
 
@@ -46,6 +46,7 @@ It does **not** establish that the candidate is universally better, that the gat
 3. Inspect [`benchmark/evidence/h100_sxm_20260913/repaired_decision/VERIFIED_RESULT.md`](benchmark/evidence/h100_sxm_20260913/repaired_decision/VERIFIED_RESULT.md).
 4. Verify the raw evidence with the nested `SHA256SUMS.txt` and the repository-wide `INTEGRITY_SHA256.txt`.
 5. Run the local tests.
+6. Inspect the frozen [`v0.9.2 adversarial plan`](docs/ADVERSARIAL_TEST_PLAN_v0.9.2.md), the preserved [`v0.9.1 failure receipt`](benchmark/adversarial/v091_failure_receipt.json), and the [`v0.9.2 campaign receipt`](benchmark/adversarial/v092_campaign_receipt.json).
 
 ## Run locally without a GPU
 
@@ -54,6 +55,7 @@ Python 3.10+ is recommended.
 ```bash
 uv sync
 uv run python -m unittest discover -s tests -v
+
 uv run python -m gate.as_gate --baseline gate/examples/baseline.json --candidate gate/examples/candidate_keep.json --evidence gate/examples/evidence_keep.json
 ```
 
@@ -78,8 +80,8 @@ The harness runs B1/C1/B2/C2/B3/C3, evaluates the pinned validation shard and se
 | `benchmark/evidence/h100_sxm_20260913/original/raw_logs/` | Unedited run logs |
 | `benchmark/evidence/h100_sxm_20260913/original/source_snapshot/` | Code and configuration captured with the experiment |
 | `benchmark/evidence/h100_sxm_20260913/repaired_decision/` | Transparent post-run import repair and final records |
-| `tests/` | 27 GPU-free tests, including a runner import regression test |
-| `docs/` | Updated dossier and executive summary |
+| `tests/` | 55 CPU-only tests, including 16 frozen adversarial and control cases |
+| `docs/` | Dossier, executive summary, audit, build clock, and adversarial reports |
 | `launch/` | Public launch copy, case study, claims, and commercial boundary |
 
 ## A transparent failure
@@ -110,6 +112,6 @@ MIT. See [`LICENSE`](LICENSE) and [`UPSTREAM_LICENSE_NOTICE.md`](UPSTREAM_LICENS
 
 ## Build clock
 
-This project moved from a precursor joke to a defined build in approximately 24 hours, then to a tested and independently CI-verified hardened prototype in approximately 52 hours. The clock remains open until the first complete external submission is sent.
+This project moved from a precursor joke to a defined build in approximately 24 hours, then to a tested prototype verified on GitHub-hosted CI in approximately 52 hours. The clock remains open until the first complete external submission is sent.
 
 [See the contemporaneous milestone ledger](docs/BUILD_CLOCK.md).

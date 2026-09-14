@@ -1,4 +1,5 @@
 import json
+import copy
 import sys
 import unittest
 from pathlib import Path
@@ -7,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from gate.as_gate import build_evidence_bundle, evaluate  # noqa: E402
+from gate.as_gate import build_evidence_bundle, canonical_sha256, evaluate  # noqa: E402
 from gate.build_candidate import build_record, parse_run_summary  # noqa: E402
 
 
@@ -23,11 +24,32 @@ class ArtificialStupidityGateTests(unittest.TestCase):
         self.evidence = load("examples/evidence_keep.json")
 
     def bound_evidence(self, candidate, config=None, checks=None, producers=None):
+        policy = config or self.config
+        check_values = checks or self.evidence["checks"]
+        producer_values = copy.deepcopy(producers or self.evidence["producers"])
+        artifacts = {}
+        if check_values.get("human_comprehensibility") == "pass":
+            reviewer = producer_values["human_comprehensibility"]["id"]
+            artifact = {
+                "schema_version": 2,
+                "reviewer": reviewer,
+                "reviewer_role": "human_reviewer",
+                "baseline_sha256": canonical_sha256(self.baseline),
+                "candidate_sha256": canonical_sha256(candidate),
+                "policy_sha256": canonical_sha256(policy),
+                "finding": "human_comprehensibility",
+                "state": "pass",
+                "scope": "unit-test fixture",
+            }
+            artifacts["human_comprehensibility"] = artifact
+            producer_values["human_comprehensibility"]["artifact_sha256"] = canonical_sha256(artifact)
         return build_evidence_bundle(
+            self.baseline,
             candidate,
-            config or self.config,
-            checks or self.evidence["checks"],
-            producers or self.evidence["producers"],
+            policy,
+            check_values,
+            producer_values,
+            artifacts,
         )
 
     def test_keeps_supported_improvement(self):
@@ -128,6 +150,22 @@ class ArtificialStupidityGateTests(unittest.TestCase):
                 self.bound_evidence(self.candidate, config=config),
             )
 
+    def test_rejects_nonboolean_policy_toggle(self):
+        config = dict(self.config, require_falsifiable_hypothesis="false")
+        with self.assertRaisesRegex(ValueError, "must be a boolean"):
+            evaluate(
+                self.baseline,
+                self.candidate,
+                config,
+                self.bound_evidence(self.candidate, config=config),
+            )
+
+    def test_rejects_human_review_payload_digest_mismatch(self):
+        evidence = self.bound_evidence(self.candidate)
+        evidence["artifacts"]["human_comprehensibility"]["scope"] = "tampered"
+        with self.assertRaisesRegex(ValueError, "digest does not match"):
+            evaluate(self.baseline, self.candidate, self.config, evidence)
+
     def test_rejects_candidate_supplied_human_approval(self):
         candidate = dict(self.candidate, human_authorization="KEEP")
         with self.assertRaisesRegex(ValueError, "reserved authority fields"):
@@ -159,7 +197,7 @@ class ArtificialStupidityGateTests(unittest.TestCase):
             "id": "candidate-controlled",
         }
         evidence = self.bound_evidence(self.candidate, producers=producers)
-        with self.assertRaisesRegex(ValueError, "human_reviewer"):
+        with self.assertRaisesRegex(ValueError, "approved|human_reviewer"):
             evaluate(self.baseline, self.candidate, self.config, evidence)
 
     def test_parses_upstream_run_summary(self):
