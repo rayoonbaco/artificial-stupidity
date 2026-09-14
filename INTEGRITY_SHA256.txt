@@ -1,4 +1,4 @@
-aadb7dfb855fc35adf5f55288cb5ad3acce32aa00960d949740bdc12bbb27f3a  ./.github/workflows/ci.yml
+97c16a28ba93dda4d22146c8f2ffc347a5b6bc9ea86f65b3f212e0ce3575e7db  ./.github/workflows/ci.yml
 9b2c1bf073ef8128207f9f4766d4bdbb137b36a214b2330627cba437bb96baf8  ./.gitignore
 7a41a41354ab8049091ef1a00253ca00567f5a1d3f9aef5502c0b4b5ce9ae707  ./.python-version
 f4f67dc4f57fda6e90c55a6564ea39babfdf62f90466cb16881bc41549c2aee6  ./CITATION.cff
