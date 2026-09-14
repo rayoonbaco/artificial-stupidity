@@ -1,4 +1,4 @@
-﻿# Artificial Stupidity Build Clock
+# Artificial Stupidity Build Clock
 
 This is a contemporaneous elapsed-time record reported by the creator, not continuously measured telemetry.
 
