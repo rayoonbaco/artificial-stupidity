@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A public demonstration of the Artificial Stupidity evidence gate for autonomous AI research.">
+  <title>Artificial Stupidity — Evidence Gate</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Artificial Stupidity home">
+      <span class="brand-mark" aria-hidden="true">AS</span>
+      <span><strong>ARTIFICIAL STUPIDITY</strong><small>A MONAHINGA™ Evidence Project</small></span>
+    </a>
+    <a class="repo-link" href="https://github.com/rayoonbaco/artificial-stupidity" rel="noreferrer">View evidence on GitHub ↗</a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="eyebrow">AN INDEPENDENT ACCEPTANCE BOUNDARY</p>
+      <h1>Intelligence proposes.<br><span>Doubt earns its seat.</span></h1>
+      <p class="lede">A better metric is not the same thing as trustworthy evidence. This gate challenges an AI research candidate before a human authorizes what survives.</p>
+      <div class="principle" aria-label="Four-stage governance flow">
+        <span>01 · PROPOSE</span><i></i><span>02 · CHALLENGE</span><i></i><span>03 · ADJUDICATE</span><i></i><span>04 · AUTHORIZE</span>
+      </div>
+    </section>
+
+    <section class="lab" aria-labelledby="lab-title">
+      <div class="lab-copy">
+        <p class="eyebrow">LIVE, GPU-FREE DEMONSTRATION</p>
+        <h2 id="lab-title">Put a candidate through the gate.</h2>
+        <p>Select a bounded scenario. The site calls the same public Python decision function used in the repository—no result is hard-coded.</p>
+        <div class="scenario-tabs" role="group" aria-label="Candidate scenarios">
+          <button type="button" data-scenario="keep">Supported gain</button>
+          <button type="button" data-scenario="reject">Weak gain</button>
+          <button type="button" data-scenario="escalate" class="active">Incomplete evidence</button>
+        </div>
+        <div class="candidate-card">
+          <div><small>VALIDATION BPB</small><strong id="candidate-bpb">{{ '%.6f'|format(scenarios.escalate.val_bpb) }}</strong></div>
+          <div><small>PEAK VRAM</small><strong id="candidate-memory">{{ '%.1f'|format(scenarios.escalate.peak_vram_mb) }} MB</strong></div>
+          <div><small>CHANGE SIZE</small><strong id="candidate-complexity">{{ scenarios.escalate.complexity_delta_lines }} lines</strong></div>
+        </div>
+        <button id="run-gate" class="run-button" type="button">Run independent gate <span>→</span></button>
+        <p id="api-error" class="error" role="alert" hidden></p>
+      </div>
+
+      <article id="decision" class="decision decision-escalate" aria-live="polite">
+        <div class="decision-topline"><span>MACHINE DECISION</span><span id="decision-index">03 / 03</span></div>
+        <div class="decision-word" id="decision-action">{{ initial.action }}</div>
+        <p id="decision-summary">Evidence is promising, but automatic acceptance pauses for human judgment.</p>
+        <div class="rule"></div>
+        <h3>Why the gate stopped</h3>
+        <ul id="decision-reasons">
+          {% for reason in initial.reasons %}<li>{{ reason }}</li>{% endfor %}
+        </ul>
+        <dl class="facts">
+          <div><dt>Metric improvement</dt><dd id="fact-gain">{{ '%.6f'|format(initial.facts.val_bpb_improvement) }}</dd></div>
+          <div><dt>Evidence coverage</dt><dd id="fact-coverage">{{ '%.0f%%'|format(initial.facts.evidence_coverage) }}</dd></div>
+          <div><dt>Memory growth</dt><dd id="fact-memory">{{ '%.2f%%'|format(initial.facts.memory_growth_fraction) }}</dd></div>
+        </dl>
+      </article>
+    </section>
+
+    <section class="evidence">
+      <div>
+        <p class="eyebrow">THE RECORDED H100 RESULT</p>
+        <h2>Promising evidence.<br>Deliberate restraint.</h2>
+        <p>Across three interleaved baseline/candidate pairs, the tested candidate won every validation and protected-holdout comparison. The machine still escalated before the separate human authorization.</p>
+      </div>
+      <div class="metrics">
+        <article><strong>9 / 9</strong><span>Validation pairwise wins</span></article>
+        <article><strong>9 / 9</strong><span>Protected-holdout wins</span></article>
+        <article><strong>0.924%</strong><span>Holdout BPB improvement</span></article>
+        <article><strong>−0.337%</strong><span>Peak VRAM change</span></article>
+      </div>
+    </section>
+
+    <section class="boundary">
+      <p class="eyebrow">CLAIM BOUNDARY</p>
+      <h2>What this is—and what it is not.</h2>
+      <div class="boundary-grid">
+        <div><h3>Established</h3><p>The prototype is executable, fail-closed, and capable of withholding automatic acceptance after a metric improves.</p></div>
+        <div><h3>Not established</h3><p>This is not universal model superiority, a production safety system, peer review, or a safety certification.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><span>Artificial Stupidity · Research prototype</span><span>Concept and direction: Raymond Anthony Gomez</span></footer>
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</body>
+</html>
