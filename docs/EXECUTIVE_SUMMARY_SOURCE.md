@@ -13,7 +13,7 @@ The smarter an AI system becomes, the more persuasive and consequential its mist
 
 ## What was built
 
-The first implementation is an external KEEP / REJECT / ESCALATE gate around Andrej Karpathy's autoresearch loop. The upstream optimizer remains intact. The gate evaluates repeatability, protected-holdout performance, resource growth, critical failures, and human comprehensibility. Malformed or missing required evidence fails closed. The public package includes 27 automated tests, a reproducible runner, complete raw logs, source snapshots, SHA-256 manifests, and separate machine and human decisions.
+The first implementation is an external KEEP / REJECT / ESCALATE gate around Andrej Karpathy's autoresearch loop. The upstream optimizer remains intact. The gate evaluates repeatability, protected-holdout performance, resource growth, critical failures, and human comprehensibility. Malformed or missing required evidence fails closed. The public package includes 36 automated tests, a reproducible runner, complete raw logs, source snapshots, SHA-256 manifests, and separate machine and human decisions.
 
 ## What the experiment found
 
@@ -64,6 +64,6 @@ The project is distinctive because it combines a memorable thesis with executabl
 
 Publish the clean repository and evidence, invite reproduction and criticism, and recruit one narrowly scoped pilot where the evidence rules and human authority can be declared before the system runs.
 
-Repository: `[insert GitHub URL]`
+Repository: `https://github.com/rayoonbaco/artificial-stupidity`
 
 Full citations appear in the accompanying dossier. Experiment evidence is preserved under `benchmark/evidence/h100_sxm_20260913/`.

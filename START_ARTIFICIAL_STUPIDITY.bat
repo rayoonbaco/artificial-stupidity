@@ -69,21 +69,21 @@ goto done
 cls
 echo Demonstrating a supported improvement...
 echo.
-%AS_PYTHON% gate\as_gate.py --baseline gate\examples\baseline.json --candidate gate\examples\candidate_keep.json
+%AS_PYTHON% gate\as_gate.py --baseline gate\examples\baseline.json --candidate gate\examples\candidate_keep.json --evidence gate\examples\evidence_keep.json
 goto done
 
 :reject
 cls
 echo Demonstrating a rejected improvement...
 echo.
-%AS_PYTHON% gate\as_gate.py --baseline gate\examples\baseline.json --candidate gate\examples\candidate_reject.json
+%AS_PYTHON% gate\as_gate.py --baseline gate\examples\baseline.json --candidate gate\examples\candidate_reject.json --evidence gate\examples\evidence_reject.json
 goto done
 
 :escalate
 cls
 echo Demonstrating an improvement that requires human review...
 echo.
-%AS_PYTHON% gate\as_gate.py --baseline gate\examples\baseline.json --candidate gate\examples\candidate_escalate.json
+%AS_PYTHON% gate\as_gate.py --baseline gate\examples\baseline.json --candidate gate\examples\candidate_escalate.json --evidence gate\examples\evidence_escalate.json
 goto done
 
 :compare
@@ -99,7 +99,7 @@ goto done
 cls
 echo Replaying the protected-holdout H100 evidence through the gate...
 echo.
-%AS_PYTHON% gate\as_gate.py --baseline benchmark\evidence\h100_sxm_20260913\repaired_decision\baseline_gate_record.json --candidate benchmark\evidence\h100_sxm_20260913\repaired_decision\candidate_gate_record.json
+%AS_PYTHON% gate\as_gate.py --baseline benchmark\evidence\h100_sxm_20260913\repaired_decision\baseline_gate_record.json --candidate benchmark\h100_v091_replay_candidate.json --evidence benchmark\h100_v091_replay_evidence.json
 echo.
 echo Expected result: ESCALATE only because a named human must authorize KEEP.
 echo The empirical validation and protected-holdout boundaries both passed.

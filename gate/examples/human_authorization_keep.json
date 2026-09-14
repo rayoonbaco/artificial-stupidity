@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "reviewer": "demonstration-reviewer",
+  "reviewer_role": "human_reviewer",
+  "candidate_sha256": "d09c574ce82b44a280a03dd8d4d49a6e2108cf8abb82e8800b6981b5d4029d6f",
+  "finding": "human_comprehensibility",
+  "state": "pass",
+  "scope": "GPU-free demonstration only"
+}

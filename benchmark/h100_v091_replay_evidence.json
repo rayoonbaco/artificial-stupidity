@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "candidate_sha256": "ca1c346db3ee03f2a383f14460812c585712312f3d7bff41de5d21c0675803fd",
+  "policy_sha256": "b56bc7ede2f3fe3db149a8dc10de33ae1f3a2f19d448f000a58c28b748b128f8",
+  "checks": {
+    "repeatability": "pass",
+    "held_out_robustness": "pass",
+    "failure_mode_review": "pass",
+    "human_comprehensibility": "unknown"
+  },
+  "producers": {
+    "repeatability": {"role": "independent_harness", "id": "h100-v0.9.0-replay"},
+    "held_out_robustness": {"role": "independent_harness", "id": "h100-v0.9.0-replay"},
+    "failure_mode_review": {"role": "independent_harness", "id": "h100-v0.9.0-replay"},
+    "human_comprehensibility": {"role": "independent_harness", "id": "h100-v0.9.0-replay"}
+  }
+}

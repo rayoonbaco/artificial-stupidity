@@ -1,4 +1,4 @@
-# Preregistered H100 validation + protected-holdout protocol
+# Predeclared H100 validation + protected-holdout protocol
 
 Protocol version: 1.0, fixed before the rerun.
 
@@ -15,7 +15,7 @@ five-minute H100 training budget?
 - Software: this archive's lockfile and source snapshot.
 - Training data: upstream default shards 00000–00009.
 - Validation data: upstream pinned shard 06542.
-- Protected holdout: preregistered shard 06541.
+- Protected holdout: predeclared shard 06541.
 - Holdout location: `~/.cache/autoresearch/protected_holdout`, outside the
   upstream `DATA_DIR`; it is unavailable to tokenizer training, model training,
   and validation loading.

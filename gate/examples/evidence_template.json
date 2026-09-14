@@ -8,5 +8,11 @@
     "held_out_robustness": "unknown",
     "failure_mode_review": "unknown",
     "human_comprehensibility": "unknown"
+  },
+  "producers": {
+    "repeatability": {"role": "independent_harness", "id": "replace-with-producer-id"},
+    "held_out_robustness": {"role": "independent_harness", "id": "replace-with-producer-id"},
+    "failure_mode_review": {"role": "independent_harness", "id": "replace-with-producer-id"},
+    "human_comprehensibility": {"role": "independent_harness", "id": "replace-with-producer-id"}
   }
 }

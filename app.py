@@ -31,6 +31,9 @@ SCENARIO_FILES = {
     "escalate": "candidate_escalate.json",
 }
 SCENARIOS = {name: _load_json(EXAMPLES / filename) for name, filename in SCENARIO_FILES.items()}
+SCENARIO_EVIDENCE = {
+    name: _load_json(EXAMPLES / f"evidence_{name}.json") for name in SCENARIO_FILES
+}
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 32 * 1024
@@ -50,7 +53,9 @@ def add_security_headers(response):
 
 @app.get("/")
 def index():
-    initial = evaluate(BASELINE, SCENARIOS["escalate"], CONFIG).to_dict()
+    initial = evaluate(
+        BASELINE, SCENARIOS["escalate"], CONFIG, SCENARIO_EVIDENCE["escalate"]
+    ).to_dict()
     return render_template(
         "index.html",
         baseline=BASELINE,
@@ -65,12 +70,13 @@ def api_evaluate():
     payload = request.get_json(silent=True)
     if not isinstance(payload, dict):
         return jsonify({"error": "Send a JSON object."}), 400
-    baseline = payload.get("baseline", BASELINE)
-    candidate = payload.get("candidate")
-    if not isinstance(baseline, dict) or not isinstance(candidate, dict):
-        return jsonify({"error": "baseline and candidate must be JSON objects."}), 400
+    scenario = payload.get("scenario")
+    if scenario not in SCENARIOS:
+        return jsonify({"error": "Choose a published demonstration scenario."}), 400
     try:
-        decision = evaluate(baseline, candidate, CONFIG)
+        decision = evaluate(
+            BASELINE, SCENARIOS[scenario], CONFIG, SCENARIO_EVIDENCE[scenario]
+        )
     except (KeyError, TypeError, ValueError) as exc:
         return jsonify({"error": f"Evidence could not be trusted: {exc}"}), 422
     return jsonify(decision.to_dict())

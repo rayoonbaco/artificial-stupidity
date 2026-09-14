@@ -6,7 +6,7 @@
 
 Artificial Stupidity is an experimental evidence gate for autonomous AI research. It adds a separate acceptance boundary around Andrej Karpathy's `autoresearch` loop so a promising metric cannot quietly certify itself. The gate can return `KEEP`, `REJECT`, or `ESCALATE` based on repeatability, protected-holdout performance, resource use, critical failures, and human review.
 
-This repository contains the working prototype, 27 automated tests, a reproducible six-run H100 protocol, complete raw logs, source snapshots, SHA-256 manifests, a separately recorded machine decision, and a named human authorization.
+This repository contains the working prototype, 32 automated tests, a reproducible six-run H100 protocol, complete raw logs, source snapshots, SHA-256 manifests, a separately recorded machine decision, and a named human authorization.
 
 ## The result in one glance
 
@@ -17,7 +17,7 @@ TOTAL_BATCH_SIZE = 2**19  # baseline
 TOTAL_BATCH_SIZE = 2**18  # candidate
 ```
 
-Under a preregistered H100 SXM protocol with three interleaved baseline/candidate pairs:
+Under a predeclared H100 SXM protocol with three interleaved baseline/candidate pairs:
 
 | Metric (lower is better) | Baseline median | Candidate median | Relative improvement |
 |---|---:|---:|---:|
@@ -35,7 +35,7 @@ The machine and human decisions remain separate in the record. That separation i
 
 ## What this establishes
 
-It establishes that this gate is executable, fail-closed, and capable of withholding automatic acceptance after a metric improves. It also establishes that this particular candidate survived the preregistered validation and sequestered-holdout test on this H100 setup.
+It establishes that this gate is executable, fail-closed, and capable of withholding automatic acceptance after a metric improves. It also establishes that this particular candidate survived the predeclared validation and sequestered-holdout test on this H100 setup.
 
 It does **not** establish that the candidate is universally better, that the gate improves safety in every domain, or that the holdout was cryptographically secret. This is a bounded research result, not a safety certification.
 
@@ -54,7 +54,7 @@ Python 3.10+ is recommended.
 ```bash
 uv sync
 uv run python -m unittest discover -s tests -v
-uv run python -m gate.as_gate gate/examples/candidate_keep.json gate/gate_config.json
+uv run python -m gate.as_gate --baseline gate/examples/baseline.json --candidate gate/examples/candidate_keep.json --evidence gate/examples/evidence_keep.json
 ```
 
 Windows users can extract the repository and double-click `START_ARTIFICIAL_STUPIDITY.bat` for a plain-language menu.
@@ -90,7 +90,7 @@ After all six paid runs and both evaluations completed, the runner failed during
 
 The research prototype and evidence are public under the repository license. Organizations interested in a private pilot may inquire about integration, private deployment, customized evidence rules, audit-ready reporting, and support. Those services are not implied warranties, safety certifications, or endorsements.
 
-Contact: **Raymond Anthony Gomez** - `[insert preferred contact or LinkedIn URL]`
+Contact: **Raymond Anthony Gomez** — [GitHub profile](https://github.com/rayoonbaco)
 
 ## Origin and attribution
 

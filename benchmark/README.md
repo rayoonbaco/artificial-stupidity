@@ -49,7 +49,7 @@ unknown. See `REAL_BENCHMARK_REPORT.md` for the complete bounded claim.
 
 ## Protected-holdout result
 
-The preregistered follow-up was completed on an NVIDIA H100 SXM with three
+The predeclared follow-up was completed on an NVIDIA H100 SXM with three
 interleaved runs per arm. The candidate improved median validation BPB by
 **0.928%** and median protected-holdout BPB by **0.924%**. All nine pairwise
 candidate-versus-baseline comparisons were wins on each metric, and all six

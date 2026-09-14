@@ -7,6 +7,7 @@ the currently accepted baseline and returns KEEP, REJECT, or ESCALATE.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 from dataclasses import dataclass, field
@@ -15,6 +16,17 @@ from typing import Any
 
 
 VALID_CHECK_STATES = {"pass", "fail", "unknown"}
+VALID_PRODUCER_ROLES = {"independent_harness", "human_reviewer"}
+RESERVED_CANDIDATE_KEYS = {
+    "checks",
+    "evidence",
+    "evidence_bundle",
+    "human_authorization",
+    "authorization",
+    "machine_gate_action",
+    "final_governed_decision",
+    "policy_sha256",
+}
 
 
 @dataclass(frozen=True)
@@ -73,10 +85,93 @@ def _string_list(record: dict[str, Any], key: str) -> list[str]:
     return value
 
 
+def canonical_sha256(record: dict[str, Any]) -> str:
+    """Hash a JSON object using a stable, whitespace-independent encoding."""
+    encoded = json.dumps(
+        record, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def build_evidence_bundle(
+    candidate: dict[str, Any],
+    config: dict[str, Any],
+    checks: dict[str, str],
+    producers: dict[str, dict[str, str]],
+) -> dict[str, Any]:
+    """Build an integrity-bound bundle outside the candidate record."""
+    return {
+        "schema_version": 1,
+        "candidate_sha256": canonical_sha256(candidate),
+        "policy_sha256": canonical_sha256(config),
+        "checks": checks,
+        "producers": producers,
+    }
+
+
+def _validated_checks(
+    candidate: dict[str, Any], evidence: dict[str, Any], config: dict[str, Any]
+) -> dict[str, str]:
+    reserved = sorted(RESERVED_CANDIDATE_KEYS.intersection(candidate))
+    if reserved:
+        raise ValueError(
+            "candidate attempted to supply reserved authority fields: "
+            + ", ".join(reserved)
+        )
+    if not isinstance(evidence, dict):
+        raise ValueError("a separate trusted evidence bundle is required")
+    if evidence.get("schema_version") != 1:
+        raise ValueError("unsupported evidence schema_version")
+    if evidence.get("candidate_sha256") != canonical_sha256(candidate):
+        raise ValueError("evidence is not bound to this candidate")
+    if evidence.get("policy_sha256") != canonical_sha256(config):
+        raise ValueError("evidence is not bound to this policy")
+
+    checks = evidence.get("checks")
+    if not isinstance(checks, dict):
+        raise ValueError("evidence checks must be an object")
+    malformed = {
+        name: state for name, state in checks.items() if state not in VALID_CHECK_STATES
+    }
+    if malformed:
+        raise ValueError(f"invalid check states: {malformed}")
+
+    producers = evidence.get("producers")
+    if not isinstance(producers, dict):
+        raise ValueError("evidence producers must be an object")
+    required = _string_list(config, "required_checks")
+    for name in required:
+        producer = producers.get(name)
+        if not isinstance(producer, dict):
+            raise ValueError(f"trusted producer is required for check: {name}")
+        role = producer.get("role")
+        producer_id = producer.get("id")
+        if role not in VALID_PRODUCER_ROLES:
+            raise ValueError(f"invalid producer role for check {name}: {role}")
+        if not isinstance(producer_id, str) or not producer_id.strip():
+            raise ValueError(f"producer id is required for check: {name}")
+        if name == "human_comprehensibility" and checks.get(name) == "pass":
+            digest = producer.get("artifact_sha256")
+            if role != "human_reviewer":
+                raise ValueError(
+                    "human_comprehensibility pass requires a human_reviewer producer"
+                )
+            if not isinstance(digest, str) or len(digest) != 64 or any(
+                char not in "0123456789abcdef" for char in digest.lower()
+            ):
+                raise ValueError(
+                    "human_comprehensibility pass requires an authorization artifact SHA-256"
+                )
+    return checks
+
+
 def evaluate(
-    baseline: dict[str, Any], candidate: dict[str, Any], config: dict[str, Any]
+    baseline: dict[str, Any],
+    candidate: dict[str, Any],
+    config: dict[str, Any],
+    evidence: dict[str, Any],
 ) -> Decision:
-    """Evaluate evidence without modifying either input record."""
+    """Evaluate a candidate against separately produced, integrity-bound evidence."""
     baseline_bpb = _finite_number(baseline, "val_bpb")
     candidate_bpb = _finite_number(candidate, "val_bpb")
     baseline_memory = _finite_number(baseline, "peak_vram_mb")
@@ -98,12 +193,7 @@ def evaluate(
     max_complexity = _nonnegative_integer(config, "maximum_complexity_delta_lines")
     complexity_delta = _nonnegative_integer(candidate, "complexity_delta_lines")
 
-    checks = candidate.get("checks", {})
-    if not isinstance(checks, dict):
-        raise ValueError("checks must be an object")
-    malformed = {name: state for name, state in checks.items() if state not in VALID_CHECK_STATES}
-    if malformed:
-        raise ValueError(f"invalid check states: {malformed}")
+    checks = _validated_checks(candidate, evidence, config)
 
     required = _string_list(config, "required_checks")
     critical = set(_string_list(config, "critical_checks"))
@@ -122,6 +212,8 @@ def evaluate(
         "memory_growth_fraction": round(memory_growth, 6),
         "complexity_delta_lines": complexity_delta,
         "evidence_coverage": round(coverage, 3),
+        "candidate_sha256": canonical_sha256(candidate),
+        "policy_sha256": canonical_sha256(config),
     }
 
     reject_reasons: list[str] = []
@@ -196,13 +288,17 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Evaluate an autoresearch candidate")
     parser.add_argument("--baseline", required=True)
     parser.add_argument("--candidate", required=True)
+    parser.add_argument("--evidence", required=True)
     parser.add_argument("--config", default=str(Path(__file__).with_name("gate_config.json")))
     parser.add_argument("--output")
     args = parser.parse_args()
 
     try:
         decision = evaluate(
-            _load_json(args.baseline), _load_json(args.candidate), _load_json(args.config)
+            _load_json(args.baseline),
+            _load_json(args.candidate),
+            _load_json(args.config),
+            _load_json(args.evidence),
         )
     except (OSError, TypeError, ValueError, KeyError, json.JSONDecodeError) as exc:
         decision = Decision("ESCALATE", [f"gate input could not be trusted: {exc}"])

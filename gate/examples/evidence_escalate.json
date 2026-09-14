@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "candidate_sha256": "8c2b438580eea2a7847f40dd4423d5bad76b5ecdb00aa27baa613c2fc2617bb2",
+  "policy_sha256": "b56bc7ede2f3fe3db149a8dc10de33ae1f3a2f19d448f000a58c28b748b128f8",
+  "checks": {
+    "repeatability": "pass",
+    "held_out_robustness": "unknown",
+    "failure_mode_review": "unknown",
+    "human_comprehensibility": "fail"
+  },
+  "producers": {
+    "repeatability": {"role": "independent_harness", "id": "demo-harness-v1"},
+    "held_out_robustness": {"role": "independent_harness", "id": "demo-harness-v1"},
+    "failure_mode_review": {"role": "independent_harness", "id": "demo-harness-v1"},
+    "human_comprehensibility": {"role": "human_reviewer", "id": "demonstration-reviewer"}
+  }
+}

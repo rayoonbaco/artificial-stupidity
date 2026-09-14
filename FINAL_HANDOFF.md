@@ -2,11 +2,11 @@
 
 ## What you have
 
-This is the complete public-ready research repository for **ARTIFICIAL STUPIDITY - A MONAHINGA™ Evidence Project**. It includes the working gate, 27 tests, updated second-edition publications, raw H100 evidence, hashes, source snapshots, repair provenance, separate machine and human decision records, and a complete LinkedIn launch package.
+This is the v0.9.1 hardening candidate for **ARTIFICIAL STUPIDITY - A MONAHINGA™ Evidence Project**. It includes the working gate, 36 defined tests, updated second-edition source documents, raw H100 evidence, hashes, source snapshots, repair provenance, separate machine and human decision records, and a complete LinkedIn launch package.
 
 ## The bounded result
 
-The preregistered H100 SXM experiment completed three interleaved baseline/candidate pairs. Median validation BPB improved 0.928%, median protected-holdout BPB improved 0.924%, every candidate beat every baseline on both metrics, and peak VRAM fell 0.337%.
+The predeclared H100 SXM experiment completed three interleaved baseline/candidate pairs. Median validation BPB improved 0.928%, median protected-holdout BPB improved 0.924%, every candidate beat every baseline on both metrics, and peak VRAM fell 0.337%.
 
 The machine returned **ESCALATE** because human comprehensibility was intentionally unknown. Raymond Anthony Gomez then reviewed the one-line change and evidence and separately authorized **KEEP** on September 13, 2026.
 
@@ -29,12 +29,12 @@ sha256sum -c INTEGRITY_SHA256.txt
 
 Windows users can double-click `START_ARTIFICIAL_STUPIDITY.bat` for the guided local demonstration.
 
-## Publish to GitHub
+## Publish the v0.9.1 hardening update
 
-1. Create an empty repository without GitHub-generated files.
-2. Upload the contents of this folder, not the enclosing folder.
-3. Replace `[insert-account]`, `[insert-repository]`, and contact placeholders.
-4. Run the verification commands and keep the output.
-5. Add the final GitHub URL to the LinkedIn post.
+1. Preserve the existing `v0.9.0-evidence-prototype` release unchanged.
+2. Replace the working repository files with this complete package.
+3. Commit as `Harden evidence trust boundary` and push to `main`.
+4. Confirm the CPU verification workflow passes on Python 3.10 and 3.12.
+5. Publish a separate `v0.9.1-hardening` prerelease.
 
 The repository is public research software, not a safety certification. Paid services may be offered around private deployment, integrations, custom evidence rules, audit-ready reporting, and support.

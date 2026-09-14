@@ -20,7 +20,8 @@ Run a local, GPU-free example:
 ```bash
 python gate/as_gate.py \
   --baseline gate/examples/baseline.json \
-  --candidate gate/examples/candidate_keep.json
+  --candidate gate/examples/candidate_keep.json \
+  --evidence gate/examples/evidence_keep.json
 ```
 
 Exit codes are `0` for `KEEP`, `2` for `REJECT`, and `3` for `ESCALATE`.
@@ -33,18 +34,24 @@ python gate/build_candidate.py \
   --run-log run.log \
   --evidence gate/examples/evidence_template.json \
   --base-ref <accepted-commit> \
-  --output candidate.json
+  --output candidate.json \
+  --evidence-output evidence-bundle.json
 
 python gate/as_gate.py \
   --baseline baseline.json \
   --candidate candidate.json \
+  --evidence evidence-bundle.json \
   --output decision.json
 ```
 
-`build_candidate.py` deliberately preserves `unknown` evidence. It will not turn
-an absent test into a pass. Any unknown required check pauses acceptance for
-human review.
+`build_candidate.py` deliberately keeps candidate facts separate from the
+evidence bundle and preserves `unknown` evidence. The gate rejects candidate
+records containing reserved check or authorization fields, verifies that the
+evidence is bound to the candidate and policy hashes, and requires a separately
+hashed human-review artifact before `human_comprehensibility` can pass.
 
-This is a research prototype, not a safety certification system. The checks are
-claims recorded by an experiment harness or reviewer; a serious deployment must
-bind them to reproducible tests and tamper-evident evidence.
+This is a research prototype, not a safety certification system. Hash binding
+detects accidental or after-the-fact substitution but does not authenticate an
+attacker who controls every file. A serious deployment must also isolate the
+policy and evidence producer through permissions, signatures, or a separate
+service.

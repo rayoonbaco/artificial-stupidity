@@ -4,7 +4,7 @@ set -u
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$PROJECT_DIR" || exit 1
 
-echo "Artificial Stupidity: preregistered H100 evidence run"
+echo "Artificial Stupidity: predeclared H100 evidence run"
 echo "This takes roughly 50-65 minutes and always creates a downloadable evidence ZIP."
 
 if ! command -v uv >/dev/null 2>&1; then

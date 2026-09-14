@@ -19,7 +19,7 @@ The phrase "artificial stupidity" has at least a 75-year lineage across machine 
 
 This project turns that synthesis into a working prototype. The gate surrounds Andrej Karpathy's autoresearch loop without giving the optimizer authority to edit the acceptance logic. It returns KEEP, REJECT, or ESCALATE.
 
-The project now includes two empirical stages. A first same-H100 PCIe benchmark found a 2.17% median validation improvement from one batch-size change but lacked a protected holdout, so the gate escalated. A later preregistered H100 SXM experiment evaluated three interleaved baseline/candidate pairs on both ordinary validation and a separately stored holdout. Median validation BPB improved 0.928%, median holdout BPB improved 0.924%, every candidate beat every baseline on both metrics, and peak VRAM fell 0.337%. The machine still escalated because human comprehensibility was intentionally unknown. Raymond Anthony Gomez reviewed the one-line change and bounded evidence and authorized KEEP.
+The project now includes two empirical stages. A first same-H100 PCIe benchmark found a 2.17% median validation improvement from one batch-size change but lacked a protected holdout, so the gate escalated. A later predeclared H100 SXM experiment evaluated three interleaved baseline/candidate pairs on both ordinary validation and a separately stored holdout. Median validation BPB improved 0.928%, median holdout BPB improved 0.924%, every candidate beat every baseline on both metrics, and peak VRAM fell 0.337%. The machine still escalated because human comprehensibility was intentionally unknown. Raymond Anthony Gomez reviewed the one-line change and bounded evidence and authorized KEEP.
 
 ## Evidence labels
 
@@ -78,7 +78,7 @@ The original configuration and a one-line candidate each ran three times under t
 
 The metric-only rule said KEEP. Artificial Stupidity said ESCALATE because the package lacked an independent protected holdout. That was not a denial of the measured gain. It was a refusal to let validation certify robustness.
 
-## Preregistered protected-holdout experiment
+## Predeclared protected-holdout experiment
 
 The follow-up protocol was fixed before execution:
 
@@ -160,7 +160,7 @@ USPTO serial 99613654 is live/pending in International Class 041 under Section 1
 
 The strongest conclusion remains deliberately modest: intelligence and judgment are not the same property, and an optimizing system should not hold sole authority to validate its own improvement.
 
-The project began as a joke about super stupidity. It now has a historical dossier, a falsifiable doctrine, an executable gate, 27 tests, two H100 benchmark stages, a preregistered protected-holdout result, raw evidence, a disclosed repair, and a completed machine-to-human authorization chain.
+The project began as a joke about super stupidity. It now has a historical dossier, a falsifiable doctrine, an executable gate, 36 tests, two H100 benchmark stages, a predeclared protected-holdout result, raw evidence, a disclosed repair, and a completed machine-to-human authorization chain.
 
 We built intelligence's brain. This project asks whether it also needs an immune system.
 

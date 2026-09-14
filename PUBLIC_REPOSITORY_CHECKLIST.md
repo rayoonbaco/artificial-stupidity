@@ -23,12 +23,12 @@ Suggested repository description:
 
 Public claim before named human authorization:
 
-> Under a preregistered six-run H100 protocol, every candidate beat every
+> Under a predeclared six-run H100 protocol, every candidate beat every
 > baseline on both validation and a sequestered holdout; the machine escalated
 > the empirically passing result for named human review.
 
 Public claim after a passing empirical rerun and named review:
 
-> Under the preregistered six-run H100 protocol, every candidate run beat every
+> Under the predeclared six-run H100 protocol, every candidate run beat every
 > baseline run on both validation and a sequestered holdout; a named human then
 > reviewed the one-line diff and authorized KEEP.

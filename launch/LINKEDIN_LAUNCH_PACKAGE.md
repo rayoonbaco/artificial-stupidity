@@ -34,7 +34,7 @@ Artificial Stupidity is a working KEEP / REJECT / ESCALATE evidence gate around 
 
 ## Long product description
 
-Artificial Stupidity is an experimental decision boundary for autonomous AI research, built as an additive derivative of Andrej Karpathy's autoresearch. Instead of allowing a single improved metric to certify a candidate, an external gate checks repeatability, sequestered-holdout performance, resource use, critical failures, and human comprehensibility. The public package includes 27 tests, a preregistered six-run H100 experiment, complete raw logs, source snapshots, hashes, a disclosed and repaired post-run import failure, and separate machine and human decisions. It is a bounded research prototype, not a general AI-safety certification.
+Artificial Stupidity is an experimental decision boundary for autonomous AI research, built as an additive derivative of Andrej Karpathy's autoresearch. Instead of allowing a single improved metric to certify a candidate, an external gate checks repeatability, sequestered-holdout performance, resource use, critical failures, and human comprehensibility. The public package includes 36 tests, a predeclared six-run H100 experiment, complete raw logs, source snapshots, hashes, a disclosed and repaired post-run import failure, and separate machine and human decisions. It is a bounded research prototype, not a general AI-safety certification.
 
 ## LinkedIn profile project entry
 
@@ -42,9 +42,9 @@ Artificial Stupidity is an experimental decision boundary for autonomous AI rese
 **Role:** Founder-builder and research director  
 **Brand:** A MONAHINGA™ Evidence Project  
 
-I designed and built an independent KEEP / REJECT / ESCALATE gate around an autonomous AI research loop. The system asks whether a metric improvement is repeatable, survives a sequestered holdout, respects resource limits, passes critical checks, and remains understandable enough for named human authorization. I then ran a preregistered six-run H100 experiment, preserved the raw logs and source snapshot, repaired a disclosed post-run import error without rerunning training, and recorded the machine ESCALATE and human KEEP as separate artifacts. The result is public and reproducible within its stated boundaries; it does not claim general AI safety.
+I designed and built an independent KEEP / REJECT / ESCALATE gate around an autonomous AI research loop. The system asks whether a metric improvement is repeatable, survives a sequestered holdout, respects resource limits, passes critical checks, and remains understandable enough for named human authorization. I then ran a predeclared six-run H100 experiment, preserved the raw logs and source snapshot, repaired a disclosed post-run import error without rerunning training, and recorded the machine ESCALATE and human KEEP as separate artifacts. The result is public and reproducible within its stated boundaries; it does not claim general AI safety.
 
-**Repository:** `[insert GitHub URL]`
+**Repository:** `https://github.com/rayoonbaco/artificial-stupidity`
 
 ## Recommended launch post
 
@@ -62,7 +62,7 @@ The result is an external evidence gate that can return **KEEP, REJECT, or ESCAL
 
 We tested one deliberately simple candidate on an NVIDIA H100 SXM: reduce total batch size from `2**19` to `2**18`.
 
-Under a preregistered six-run protocol:
+Under a predeclared six-run protocol:
 
 - median validation BPB improved **0.928%**;
 - median protected-holdout BPB improved **0.924%**;
@@ -78,9 +78,9 @@ We also preserved the messy part: after the paid runs finished, the final runner
 
 That is what this project is really about. Not pretending machines never fail. Building a process in which improvement, doubt, evidence, repair, and human authority stay visible.
 
-The public research edition includes the code, 27 tests, raw logs, source snapshots, hashes, dossier, executive summary, and reproduction protocol.
+The public research edition includes the code, 36 tests, raw logs, source snapshots, hashes, dossier, executive summary, and reproduction protocol.
 
-Repository: `[insert GitHub URL]`
+Repository: `https://github.com/rayoonbaco/artificial-stupidity`
 
 I am also open to a small number of paid organizational pilots involving private deployment, customized evidence rules, audit-ready reporting, integration, and support.
 
@@ -96,13 +96,13 @@ What if an AI could improve a metric - but still could not approve itself?
 
 I built Artificial Stupidity, an independent KEEP / REJECT / ESCALATE evidence gate around Andrej Karpathy's autoresearch loop.
 
-In a preregistered six-run H100 experiment, a one-line batch-size candidate improved median validation BPB by 0.928% and a sequestered holdout by 0.924%. Every candidate beat every baseline on both metrics. Yet the machine returned ESCALATE until a named human reviewed the evidence and authorized KEEP.
+In a predeclared six-run H100 experiment, a one-line batch-size candidate improved median validation BPB by 0.928% and a sequestered holdout by 0.924%. Every candidate beat every baseline on both metrics. Yet the machine returned ESCALATE until a named human reviewed the evidence and authorized KEEP.
 
-The public package includes the code, 27 tests, raw logs, hashes, source snapshots, the disclosed repair of a post-run import failure, and the separate machine/human decision record.
+The public package includes the code, 36 tests, raw logs, hashes, source snapshots, the disclosed repair of a post-run import failure, and the separate machine/human decision record.
 
 The point is not that criticism makes AI safe. The point is that an optimizer should not hold sole authority to certify its own improvement.
 
-Repository: `[insert GitHub URL]`
+Repository: `https://github.com/rayoonbaco/artificial-stupidity`
 
 **ARTIFICIAL STUPIDITY - A MONAHINGA™ Evidence Project**
 
@@ -114,7 +114,7 @@ The fastest verification path is: executive summary -> verified result -> raw lo
 
 ## Respectful outreach to Andrej Karpathy
 
-Hi Andrej - your autoresearch project inspired me to ask a complementary question: what happens if the optimizing loop cannot accept its own improvement without an independent evidence gate? I built a small MIT-licensed derivative that preserves your core loop and adds KEEP / REJECT / ESCALATE, a sequestered holdout, raw evidence packaging, and named human authorization. The first preregistered six-run H100 result passed its bounded criteria; the machine still escalated until a human reviewed the one-line change. I have credited your work clearly and made no claim of endorsement. If you are curious, the repository is here: `[insert GitHub URL]`. Either way, thank you for the inspiration - this was the most fun I have had building in a long time.
+Hi Andrej - your autoresearch project inspired me to ask a complementary question: what happens if the optimizing loop cannot accept its own improvement without an independent evidence gate? I built a small MIT-licensed derivative that preserves your core loop and adds KEEP / REJECT / ESCALATE, a sequestered holdout, raw evidence packaging, and named human authorization. The first predeclared six-run H100 result passed its bounded criteria; the machine still escalated until a human reviewed the one-line change. I have credited your work clearly and made no claim of endorsement. If you are curious, the repository is here: `https://github.com/rayoonbaco/artificial-stupidity`. Either way, thank you for the inspiration - this was the most fun I have had building in a long time.
 
 ## Case study
 
@@ -140,7 +140,7 @@ As autonomous systems take more actions, organizations need mechanisms that pres
 
 ### Public release
 
-`[insert GitHub URL]`
+`https://github.com/rayoonbaco/artificial-stupidity`
 
 ## Graphic brief
 

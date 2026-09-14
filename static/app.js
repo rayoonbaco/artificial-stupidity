@@ -50,7 +50,7 @@ document.getElementById("run-gate").addEventListener("click", async () => {
     const response = await fetch("/api/evaluate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ baseline, candidate: scenarios[selected] })
+      body: JSON.stringify({ scenario: selected })
     });
     const result = await response.json();
     if (!response.ok) throw new Error(result.error || "The gate could not run.");

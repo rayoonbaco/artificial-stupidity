@@ -16,7 +16,7 @@
   escalates; malformed or impossible inputs fail closed; upstream core files
   remain byte-identical.
 - **Excluded:** new training architecture, safety certification, or empirical
-  proof that the gate improves real-world safety. The preregistered
+  proof that the gate improves real-world safety. The predeclared
   protected-holdout experiment now passes its bounded empirical conditions;
   broader generalization remains a separate question. Named human authorization
   was completed on September 13, 2026.

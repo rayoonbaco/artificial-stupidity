@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from gate.as_gate import Decision, evaluate
+from gate.as_gate import Decision, build_evidence_bundle, canonical_sha256, evaluate
 
 
 def load_object(path: str | Path) -> dict[str, Any]:
@@ -56,13 +56,31 @@ def compare(manifest: dict[str, Any], config: dict[str, Any]) -> dict[str, Any]:
     for index, candidate in enumerate(experiments, start=1):
         if not isinstance(candidate, dict):
             raise ValueError(f"experiment {index} must be an object")
-        upstream = original_decision(baseline, candidate)
-        gated: Decision = evaluate(baseline, candidate, config)
+        checks = candidate.get("checks")
+        if not isinstance(checks, dict):
+            raise ValueError(f"experiment {index} checks must be an object")
+        candidate_record = {key: value for key, value in candidate.items() if key != "checks"}
+        producer_id = f"synthetic-comparison-{index}"
+        producers = {
+            name: {"role": "independent_harness", "id": producer_id}
+            for name in checks
+        }
+        if checks.get("human_comprehensibility") == "pass":
+            producers["human_comprehensibility"] = {
+                "role": "human_reviewer",
+                "id": "synthetic-reviewer",
+                "artifact_sha256": canonical_sha256(
+                    {"candidate": candidate_record.get("commit"), "synthetic": True}
+                ),
+            }
+        evidence = build_evidence_bundle(candidate_record, config, checks, producers)
+        upstream = original_decision(baseline, candidate_record)
+        gated: Decision = evaluate(baseline, candidate_record, config, evidence)
         challenged = upstream == "KEEP" and gated.action != "KEEP"
         row = {
-            "experiment": candidate.get("experiment", index),
-            "description": candidate.get("description", ""),
-            "val_bpb": candidate.get("val_bpb"),
+            "experiment": candidate_record.get("experiment", index),
+            "description": candidate_record.get("description", ""),
+            "val_bpb": candidate_record.get("val_bpb"),
             "original_action": upstream,
             "gated_action": gated.action,
             "challenged_keep": challenged,

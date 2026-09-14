@@ -1,0 +1,9 @@
+{
+  "commit": "candidate-total-batch-2pow18",
+  "complexity_delta_lines": 1,
+  "disconfirming_result": "Any failed candidate run, overlapping validation distributions, or a candidate holdout result that does not beat every baseline run.",
+  "hypothesis": "Halving total batch size improves five-minute validation BPB and the predeclared protected-holdout BPB on the same H100 setup.",
+  "peak_vram_mb": 44908.2,
+  "run_status": "ok",
+  "val_bpb": 0.990934
+}

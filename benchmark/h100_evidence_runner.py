@@ -1,4 +1,4 @@
-"""Run and package the preregistered H100 validation + holdout experiment.
+"""Run and package the predeclared H100 validation + holdout experiment.
 
 This module intentionally keeps the upstream ``prepare.py`` and ``train.py``
 untouched. It runs two instrumented derivatives that differ by one functional
@@ -28,7 +28,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from gate.as_gate import Decision, evaluate
+from gate.as_gate import Decision, build_evidence_bundle, evaluate
 from gate.as_gate import _load_json as load_json
 
 BASELINE_SCRIPT = ROOT / "benchmark" / "instrumented" / "train_baseline_holdout.py"
@@ -56,6 +56,7 @@ SNAPSHOT_FILES = (
     "benchmark/instrumented/train_baseline_holdout.py",
     "benchmark/instrumented/train_candidate_holdout.py",
     "benchmark/H100_RERUN_PROTOCOL.md",
+    "benchmark/h100_evidence_runner.py",
     "gate/as_gate.py",
     "gate/gate_config.json",
 )
@@ -173,18 +174,30 @@ def evaluate_run_sets(
             "complexity_delta_lines": 1,
             "hypothesis": (
                 "Halving total batch size improves five-minute validation BPB and "
-                "the preregistered protected-holdout BPB on the same H100 setup."
+                "the predeclared protected-holdout BPB on the same H100 setup."
             ),
             "disconfirming_result": (
                 "Any failed candidate run, overlapping validation distributions, "
                 "or a candidate holdout result that does not beat every baseline run."
             ),
-            "checks": summary["checks"],
         }
+    evidence_bundle = None
+    if candidate_record is not None:
+        producers = {
+            name: {"role": "independent_harness", "id": "h100-evidence-runner"}
+            for name in summary["checks"]
+        }
+        evidence_bundle = build_evidence_bundle(
+            candidate_record,
+            load_json(ROOT / "gate" / "gate_config.json"),
+            summary["checks"],
+            producers,
+        )
     return {
         "summary": summary,
         "baseline_gate_record": baseline_record,
         "candidate_gate_record": candidate_record,
+        "evidence_bundle": evidence_bundle,
     }
 
 
@@ -214,7 +227,7 @@ Generated: {datetime.now(timezone.utc).isoformat()}
 
 ## Interpretation boundary
 
-The preregistered automated boundary requires every candidate score to beat
+The predeclared automated boundary requires every candidate score to beat
 every baseline score in both validation and protected holdout. The holdout is
 sequestered from the upstream data directory, tokenizer, training loader, and
 pinned validation shard. It is protected by this harness and its recorded
@@ -306,7 +319,7 @@ def main(argv: Iterable[str] | None = None) -> int:
     parser.add_argument("--output-root", type=Path, default=ROOT.parent / "artificial-stupidity-evidence")
     args = parser.parse_args(list(argv) if argv is not None else None)
     if args.runs != EXPECTED_RUNS:
-        parser.error("the preregistered protocol requires exactly three runs per arm")
+        parser.error("the predeclared protocol requires exactly three runs per arm")
 
     stamp = utc_stamp()
     run_dir = args.output_root.resolve() / stamp
@@ -342,10 +355,10 @@ def main(argv: Iterable[str] | None = None) -> int:
 
         query = environment["commands"]["nvidia_query"]
         if query["exit_code"] != 0 or "H100" not in query["stdout"]:
-            raise RuntimeError("preregistered hardware check failed: one NVIDIA H100 is required")
+            raise RuntimeError("predeclared hardware check failed: one NVIDIA H100 is required")
         gpu_lines = [line for line in query["stdout"].splitlines() if line.strip()]
         if len(gpu_lines) != 1:
-            raise RuntimeError("preregistered hardware check failed: exactly one GPU is required")
+            raise RuntimeError("predeclared hardware check failed: exactly one GPU is required")
 
         copy_source_snapshot(run_dir)
         preparation = run_logged(
@@ -365,7 +378,7 @@ def main(argv: Iterable[str] | None = None) -> int:
         for index in range(1, args.runs + 1):
             order.extend((("baseline", index, BASELINE_SCRIPT), ("candidate", index, CANDIDATE_SCRIPT)))
         _write_json(
-            run_dir / "preregistered_order.json",
+            run_dir / "predeclared_order.json",
             [{"arm": arm, "run": index, "script": str(script.relative_to(ROOT))} for arm, index, script in order],
         )
 
@@ -397,13 +410,14 @@ def main(argv: Iterable[str] | None = None) -> int:
         )
         if complete_failed_run:
             decision = Decision(
-                "REJECT", ["one or more preregistered training runs failed"]
+                "REJECT", ["one or more predeclared training runs failed"]
             ).to_dict()
         elif evidence["baseline_gate_record"] and evidence["candidate_gate_record"]:
             decision = evaluate(
                 evidence["baseline_gate_record"],
                 evidence["candidate_gate_record"],
                 load_json(ROOT / "gate" / "gate_config.json"),
+                evidence["evidence_bundle"],
             ).to_dict()
         else:
             decision = Decision(

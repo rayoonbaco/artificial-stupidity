@@ -167,7 +167,7 @@ def parse_markdown(path: Path, st, chart_path: Path, compact: bool = False):
         if raw.startswith("## "):
             heading = raw[3:]
             story.append(Paragraph(inline(heading), st["h2"]))
-            if heading in {"Preregistered protected-holdout experiment", "The result in numbers"} and not inserted_chart:
+            if heading in {"Predeclared protected-holdout experiment", "The result in numbers"} and not inserted_chart:
                 story.append(Spacer(1, 2))
             i += 1
             continue
@@ -209,7 +209,7 @@ def parse_markdown(path: Path, st, chart_path: Path, compact: bool = False):
             ]))
             story.extend([t, Spacer(1, 8)])
             if not inserted_chart and any("Protected-holdout" in c or "Holdout BPB" in c for row in rows for c in row):
-                story.extend([Image(str(chart_path), width=6.8*inch, height=2.35*inch), Paragraph("Median results from the preregistered H100 SXM experiment. Lower BPB is better.", st["small"]), Spacer(1, 6)])
+                story.extend([Image(str(chart_path), width=6.8*inch, height=2.35*inch), Paragraph("Median results from the predeclared H100 SXM experiment. Lower BPB is better.", st["small"]), Spacer(1, 6)])
                 inserted_chart = True
             continue
         if raw.startswith("- "):

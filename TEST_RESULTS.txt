@@ -1,3 +1,5 @@
+Historical note: this is the preserved v0.9.0 test transcript. See TEST_RESULTS_v091.txt for the current hardening-candidate run.
+
 test_builds_candidate_without_inventing_evidence (test_as_gate.ArtificialStupidityGateTests) ... ok
 test_escalates_missing_falsifiability_statement (test_as_gate.ArtificialStupidityGateTests) ... ok
 test_escalates_missing_noncritical_required_evidence (test_as_gate.ArtificialStupidityGateTests) ... ok

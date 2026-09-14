@@ -39,7 +39,7 @@ def sha256_file(path: Path) -> str:
 
 
 def prepare_holdout() -> dict[str, object]:
-    """Download the preregistered shard once and return its identity record."""
+    """Download the predeclared shard once and return its identity record."""
     HOLDOUT_DIR.mkdir(parents=True, exist_ok=True)
     if not HOLDOUT_PATH.exists():
         temporary = HOLDOUT_PATH.with_suffix(".parquet.tmp")

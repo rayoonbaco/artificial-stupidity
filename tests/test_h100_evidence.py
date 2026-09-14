@@ -13,10 +13,8 @@ from benchmark.h100_evidence_runner import (
     package_evidence,
     parse_metrics,
 )
-from benchmark.protected_holdout import HOLDOUT_DIR
 from gate.as_gate import evaluate
 import json
-from prepare import DATA_DIR
 
 
 def record(val, holdout, memory=45000.0, exit_code=0):
@@ -69,7 +67,10 @@ class H100EvidenceTests(unittest.TestCase):
             )
         )
         decision = evaluate(
-            result["baseline_gate_record"], result["candidate_gate_record"], config
+            result["baseline_gate_record"],
+            result["candidate_gate_record"],
+            config,
+            result["evidence_bundle"],
         )
         self.assertEqual(decision.action, "ESCALATE")
 
@@ -84,7 +85,10 @@ class H100EvidenceTests(unittest.TestCase):
             )
         )
         decision = evaluate(
-            result["baseline_gate_record"], result["candidate_gate_record"], config
+            result["baseline_gate_record"],
+            result["candidate_gate_record"],
+            config,
+            result["evidence_bundle"],
         )
         self.assertEqual(decision.action, "REJECT")
 
@@ -104,7 +108,15 @@ class H100EvidenceTests(unittest.TestCase):
         self.assertEqual(checks["repeatability"], "unknown")
 
     def test_holdout_storage_is_outside_upstream_data(self):
-        self.assertFalse(Path(HOLDOUT_DIR).is_relative_to(Path(DATA_DIR)))
+        root = Path(__file__).resolve().parents[1]
+        holdout_source = (root / "benchmark" / "protected_holdout.py").read_text(
+            encoding="utf-8"
+        )
+        prepare_source = (root / "prepare.py").read_text(encoding="utf-8")
+        self.assertIn(
+            'HOLDOUT_DIR = Path(CACHE_DIR) / "protected_holdout"', holdout_source
+        )
+        self.assertIn('DATA_DIR = os.path.join(CACHE_DIR, "data")', prepare_source)
 
     def test_candidate_has_exactly_one_functional_diff(self):
         baseline = BASELINE_SCRIPT.read_text(encoding="utf-8").splitlines()
