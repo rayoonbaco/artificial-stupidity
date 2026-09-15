@@ -17,7 +17,7 @@ TOTAL_BATCH_SIZE = 2**19  # baseline
 TOTAL_BATCH_SIZE = 2**18  # candidate
 ```
 
-Under a predeclared H100 SXM protocol with three interleaved baseline/candidate pairs:
+Under a predeclared fixed-wall-clock H100 SXM protocol, three baseline runs and three candidate runs were interleaved B1/C1/B2/C2/B3/C3:
 
 | Metric (lower is better) | Baseline median | Candidate median | Relative improvement |
 |---|---:|---:|---:|
@@ -25,8 +25,8 @@ Under a predeclared H100 SXM protocol with three interleaved baseline/candidate 
 | Protected-holdout BPB | 0.999357 | 0.990126 | 0.924% |
 | Peak VRAM | 45,060.2 MB | 44,908.2 MB | 0.337% lower |
 
-- Every candidate beat every baseline on validation: **9/9 pairwise wins**.
-- Every candidate beat every baseline on the sequestered holdout: **9/9 pairwise wins**.
+- Each of the three candidate runs beat each of the three baseline runs on validation (all nine cross-arm comparisons).
+- Each of the three candidate runs beat each of the three baseline runs on the sequestered holdout (all nine cross-arm comparisons).
 - All six training runs exited successfully.
 - The machine returned **ESCALATE** because human comprehensibility was intentionally unknown.
 - Raymond Anthony Gomez reviewed the bounded evidence and one-line change and authorized **KEEP** on September 13, 2026.
@@ -35,9 +35,9 @@ The machine and human decisions remain separate in the record. That separation i
 
 ## What this establishes
 
-It establishes that this gate is executable, fail-closed, and capable of withholding automatic acceptance after a metric improves. It also establishes that this particular candidate survived the predeclared validation and sequestered-holdout test on this H100 setup.
+It establishes that the current gate is executable, fail-closed, and capable of withholding automatic acceptance after a metric improves. It also establishes that, under this specific fixed-wall-clock H100 protocol, each candidate run recorded lower validation and holdout BPB than each baseline run.
 
-It does **not** establish that the candidate is universally better, that the gate improves safety in every domain, or that the holdout was cryptographically secret. This is a bounded research result, not a safety certification.
+The protocol did not hold total optimizer steps or tokens processed constant, so it does not isolate batch size as the cause of the observed difference. It does **not** establish that the candidate is universally better, that smaller batches generally improve model performance, that the gate improves safety in every domain, or that the holdout was cryptographically secret. This is a bounded engineering result, not a causal scientific finding or safety certification.
 
 ## Start here
 
@@ -76,7 +76,7 @@ The harness runs B1/C1/B2/C2/B3/C3, evaluates the pinned validation shard and se
 
 | Path | Purpose |
 |---|---|
-| `gate/` | Independent KEEP / REJECT / ESCALATE decision logic |
+| `gate/` | Separate KEEP / REJECT / ESCALATE decision logic |
 | `benchmark/` | Comparison tools, protocol, reports, and preserved evidence |
 | `benchmark/second_domain_bill_xray/` | Frozen legislative-claim cases, separate adapter, source record, and receipt |
 | `benchmark/evidence/h100_sxm_20260913/original/raw_logs/` | Unedited run logs |
@@ -86,7 +86,11 @@ The harness runs B1/C1/B2/C2/B3/C3, evaluates the pinned validation shard and se
 | `docs/` | Dossier, executive summary, audit, build clock, and adversarial reports |
 | `launch/` | Public launch copy, case study, claims, and commercial boundary |
 
-## A transparent failure
+## An adversarial failure that changed the gate
+
+The first v0.9.1 adversarial campaign exposed a serious trust-boundary weakness: 8 of 9 attack probes produced unjustified `KEEP` outcomes. Version 0.9.2 repaired those paths, added explicit unknown-state remedies, and passed the frozen follow-up attack and control matrix. The before-and-after receipts remain public so the repaired result does not erase the original failure.
+
+## A transparent execution failure
 
 After all six paid runs and both evaluations completed, the runner failed during its final gate import with `ModuleNotFoundError: No module named 'gate'`. The evidence archive, hashes, logs, and source snapshot were unaffected. The decision was reconstructed locally from those preserved inputs using the captured gate code and configuration; no additional model training occurred. The import path is fixed and covered by a regression test. See `REPAIR_PROVENANCE.md` in the evidence folder.
 
@@ -110,7 +114,7 @@ Artificial Stupidity is a working research prototype. It is not peer reviewed, p
 
 ## Second-domain result
 
-The doctrine has also been exercised against three predeclared Bill X-Ray legislative claims. It kept a source-supported statutory statement, rejected a contradicted mandate-and-funding overclaim, and escalated an unsupported contractor-outcome forecast. This is initial same-team portability evidence—not legal advice, independent reproduction, an error-rate estimate, or proof of general AI safety.
+The doctrine has also been exercised against three same-team, pre-labeled Bill X-Ray legislative claims frozen before adapter implementation. It kept a source-supported statutory statement, rejected a contradicted mandate-and-funding overclaim, and escalated an unsupported contractor-outcome forecast. This is initial same-team portability evidence—not legal advice, independent reproduction, an error-rate estimate, or proof of general AI safety.
 
 ## License
 

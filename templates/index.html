@@ -18,7 +18,7 @@
 
   <main id="top">
     <section class="hero">
-      <p class="eyebrow">AN INDEPENDENT ACCEPTANCE BOUNDARY</p>
+      <p class="eyebrow">A SEPARATE ACCEPTANCE BOUNDARY</p>
       <h1>Intelligence proposes.<br><span>Doubt earns its seat.</span></h1>
       <p class="lede">A better metric is not the same thing as trustworthy evidence. This gate challenges an AI research candidate before a human authorizes what survives.</p>
       <div class="principle" aria-label="Four-stage governance flow">
@@ -41,7 +41,7 @@
           <div><small>PEAK VRAM</small><strong id="candidate-memory">{{ '%.1f'|format(scenarios.escalate.peak_vram_mb) }} MB</strong></div>
           <div><small>CHANGE SIZE</small><strong id="candidate-complexity">{{ scenarios.escalate.complexity_delta_lines }} lines</strong></div>
         </div>
-        <button id="run-gate" class="run-button" type="button">Run independent gate <span>→</span></button>
+        <button id="run-gate" class="run-button" type="button">Run separate gate <span>→</span></button>
         <p id="api-error" class="error" role="alert" hidden></p>
       </div>
 
@@ -66,11 +66,12 @@
       <div>
         <p class="eyebrow">THE RECORDED H100 RESULT</p>
         <h2>Promising evidence.<br>Deliberate restraint.</h2>
-        <p>Across three interleaved baseline/candidate pairs, the tested candidate won every validation and protected-holdout comparison. The machine still escalated before the separate human authorization.</p>
+        <p>Across three baseline runs and three candidate runs, interleaved B1/C1/B2/C2/B3/C3, every candidate recorded lower validation and protected-holdout BPB than every baseline. The machine still escalated before the separate human authorization.</p>
+        <p>This was a fixed-wall-clock test. Steps and tokens processed were not held constant, so the result does not establish that batch size caused the difference.</p>
       </div>
       <div class="metrics">
-        <article><strong>9 / 9</strong><span>Validation pairwise wins</span></article>
-        <article><strong>9 / 9</strong><span>Protected-holdout wins</span></article>
+        <article><strong>3 + 3</strong><span>Baseline and candidate runs</span></article>
+        <article><strong>All 3</strong><span>Candidates beat all 3 baselines</span></article>
         <article><strong>0.924%</strong><span>Holdout BPB improvement</span></article>
         <article><strong>−0.337%</strong><span>Peak VRAM change</span></article>
       </div>
@@ -80,7 +81,7 @@
       <div class="portability-copy">
         <p class="eyebrow">SECOND-DOMAIN VALIDATION · BILL X-RAY</p>
         <h2 id="portability-title">Does the doctrine travel?</h2>
-        <p>We froze three Illinois legislative-claim cases before writing a separate adapter. The protected AI-research gate and Bill X-Ray code were left unchanged.</p>
+        <p>We froze three same-team, pre-labeled Illinois legislative-claim cases before writing a separate adapter. The protected AI-research gate and Bill X-Ray code were left unchanged.</p>
       </div>
       <div class="portability-cases">
         <article class="case-keep"><span>BX01 · SUPPORTED STATUTE</span><strong>KEEP</strong><p>A municipality receiving one Phase I response may conditionally proceed.</p></article>
