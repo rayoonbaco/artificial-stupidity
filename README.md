@@ -4,9 +4,9 @@
 
 > Intelligence proposes. Artificial Stupidity challenges. Evidence adjudicates. A human authorizes.
 
-Artificial Stupidity is an experimental evidence gate for autonomous AI research. It adds a separate acceptance boundary around Andrej Karpathy's `autoresearch` loop so a promising metric cannot quietly certify itself. The gate can return `KEEP`, `REJECT`, or `ESCALATE` based on repeatability, protected-holdout performance, resource use, critical failures, and human review.
+Artificial Stupidity is an experimental evidence gate for autonomous AI research. It adds a separate acceptance boundary around Andrej Karpathy's `autoresearch` loop so a promising metric cannot quietly certify itself. The gate can return `KEEP`, `REJECT`, or `ESCALATE` based on repeatability, separately stored holdout performance, resource use, critical failures, and human review.
 
-This repository contains the working prototype, 74 automated tests, a reproducible six-run H100 protocol, complete raw logs, source snapshots, SHA-256 manifests, a separately recorded machine decision, a named human authorization, preserved before/after adversarial receipts, and a frozen second-domain validation using Bill X-Ray legislative claims.
+This repository contains the working prototype, 74 automated tests, a reproducible six-run H100 protocol, complete raw logs, source snapshots, SHA-256 manifests, a separately recorded machine decision, a named human authorization, preserved before/after adversarial receipts, and a frozen same-team portability demonstration using Bill X-Ray legislative claims.
 
 ## The result in one glance
 
@@ -17,7 +17,7 @@ TOTAL_BATCH_SIZE = 2**19  # baseline
 TOTAL_BATCH_SIZE = 2**18  # candidate
 ```
 
-Under a predeclared fixed-wall-clock H100 SXM protocol, three baseline runs and three candidate runs were interleaved B1/C1/B2/C2/B3/C3:
+Under a declared fixed-wall-clock H100 SXM protocol, three baseline runs and three candidate runs were interleaved B1/C1/B2/C2/B3/C3:
 
 | Metric (lower is better) | Baseline median | Candidate median | Relative improvement |
 |---|---:|---:|---:|
@@ -26,7 +26,7 @@ Under a predeclared fixed-wall-clock H100 SXM protocol, three baseline runs and 
 | Peak VRAM | 45,060.2 MB | 44,908.2 MB | 0.337% lower |
 
 - Each of the three candidate runs beat each of the three baseline runs on validation (all nine cross-arm comparisons).
-- Each of the three candidate runs beat each of the three baseline runs on the sequestered holdout (all nine cross-arm comparisons).
+- Each of the three candidate runs beat each of the three baseline runs on the separately stored holdout (all nine cross-arm comparisons).
 - All six training runs exited successfully.
 - The machine returned **ESCALATE** because human comprehensibility was intentionally unknown.
 - Raymond Anthony Gomez reviewed the bounded evidence and one-line change and authorized **KEEP** on September 13, 2026.
@@ -41,13 +41,16 @@ The protocol did not hold total optimizer steps or tokens processed constant, so
 
 ## Start here
 
-1. Read [`docs/Artificial_Stupidity_Executive_Summary_Ray_Gomez_2026.pdf`](docs/Artificial_Stupidity_Executive_Summary_Ray_Gomez_2026.pdf).
-2. Read [`docs/Artificial_Stupidity_Dossier_Ray_Gomez_2026.pdf`](docs/Artificial_Stupidity_Dossier_Ray_Gomez_2026.pdf).
-3. Inspect [`benchmark/evidence/h100_sxm_20260913/repaired_decision/VERIFIED_RESULT.md`](benchmark/evidence/h100_sxm_20260913/repaired_decision/VERIFIED_RESULT.md).
-4. Verify the raw evidence with the nested `SHA256SUMS.txt` and the repository-wide `INTEGRITY_SHA256.txt`.
-5. Run the local tests.
-6. Inspect the frozen [`v0.9.2 adversarial plan`](docs/ADVERSARIAL_TEST_PLAN_v0.9.2.md), the preserved [`v0.9.1 failure receipt`](benchmark/adversarial/v091_failure_receipt.json), and the [`v0.9.2 campaign receipt`](benchmark/adversarial/v092_campaign_receipt.json).
-7. Inspect the pre-implementation [`Bill X-Ray contract`](docs/BILL_XRAY_SECOND_DOMAIN_CONTRACT_v0.9.3.md), [`results`](docs/BILL_XRAY_SECOND_DOMAIN_RESULTS_v0.9.3.md), and machine-readable [`receipt`](benchmark/second_domain_bill_xray/machine_receipt.json).
+Choose the shortest useful path:
+
+1. **Plain-English orientation:** [Human Companion v0.9.4](docs/Artificial_Stupidity_Human_Companion_v0.9.4.pdf).
+2. **Three-minute review:** [Executive Summary v0.9.4](docs/Artificial_Stupidity_Executive_Summary_Ray_Gomez_2026.pdf).
+3. **Full record:** [Research Dossier v0.9.4](docs/Artificial_Stupidity_Dossier_Ray_Gomez_2026.pdf).
+4. **Visual chronology:** [Joke → build → test → fail → repair → invite review](static/evidence-chronology-v0.9.4.png).
+5. **Machine record:** inspect [`VERIFIED_RESULT.md`](benchmark/evidence/h100_sxm_20260913/repaired_decision/VERIFIED_RESULT.md).
+6. **Integrity:** verify the nested `SHA256SUMS.txt` files and repository-wide `INTEGRITY_SHA256.txt`.
+7. **Adversarial record:** compare the frozen [`v0.9.2 plan`](docs/ADVERSARIAL_TEST_PLAN_v0.9.2.md), preserved [`v0.9.1 failure receipt`](benchmark/adversarial/v091_failure_receipt.json), and [`v0.9.2 campaign receipt`](benchmark/adversarial/v092_campaign_receipt.json).
+8. **Portability exercise:** inspect the pre-implementation [`Bill X-Ray contract`](docs/BILL_XRAY_SECOND_DOMAIN_CONTRACT_v0.9.3.md), [`results`](docs/BILL_XRAY_SECOND_DOMAIN_RESULTS_v0.9.3.md), and machine-readable [`receipt`](benchmark/second_domain_bill_xray/machine_receipt.json).
 
 ## Run locally without a GPU
 
